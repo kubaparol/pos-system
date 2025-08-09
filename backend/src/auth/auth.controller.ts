@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { prisma } from '../config/db';
-import { env } from '../config/env';
+import { prisma } from '../shared/config/db';
+import { env } from '../shared/config/env';
 
 export const signIn = async (
   req: Request,

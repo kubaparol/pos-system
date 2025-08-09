@@ -1,15 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { Prisma } from '../../generated/prisma';
-import { prisma } from '../config/db';
-
-const serializeForJson = <T>(input: T): T => {
-  return JSON.parse(
-    JSON.stringify(input, (_key, value) =>
-      typeof value === 'bigint' ? value.toString() : value,
-    ),
-  ) as T;
-};
+import { prisma } from '../shared/config/db';
+import { serializeForJson } from '../shared/utils/serialize-for-json';
 
 interface FinalizeOrderItemInput {
   productId: string;

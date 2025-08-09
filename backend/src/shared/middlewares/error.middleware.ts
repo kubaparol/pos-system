@@ -1,15 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { Prisma } from '../../generated/prisma';
+import { Prisma } from '../../../generated/prisma';
+import { isStringArray } from '../utils/is-string-array';
 
 interface ErrorResponseBody {
   error: string;
   success: false;
 }
-
-const isStringArray = (value: unknown): value is string[] => {
-  return Array.isArray(value) && value.every((v) => typeof v === 'string');
-};
 
 export const errorMiddleware = (
   err: unknown,

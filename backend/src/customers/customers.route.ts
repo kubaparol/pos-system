@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { validateRequest } from '../middlewares/validation.middleware';
+import { validateRequest } from '../shared/middlewares/validation.middleware';
 import {
   createCustomer,
   getCustomerByPhone,

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { prisma } from '../config/db';
+import { prisma } from '../shared/config/db';
 
 export const listProducts = async (
   req: Request,

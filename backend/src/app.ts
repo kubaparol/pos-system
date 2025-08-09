@@ -2,11 +2,11 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 
 import authRouter from './auth/auth.route';
-import { env } from './config/env';
 import customersRouter from './customers/customers.route';
-import { errorMiddleware } from './middlewares/error.middleware';
 import ordersRouter from './orders/orders.route';
 import productsRouter from './products/products.route';
+import { env } from './shared/config/env';
+import { errorMiddleware } from './shared/middlewares/error.middleware';
 
 const app = express();
 
