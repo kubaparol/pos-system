@@ -4,6 +4,7 @@ import express from 'express';
 import authRouter from './auth/auth.route';
 import { env } from './config/env';
 import { errorMiddleware } from './middlewares/error.middleware';
+import productsRouter from './products/products.route';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
+app.use('/api/products', productsRouter);
 
 app.use(errorMiddleware);
 
