@@ -7,6 +7,10 @@ export const listProductsValidation = [
     .optional()
     .isIn(['true', 'false'])
     .withMessage('archived must be true or false'),
+  query('stock')
+    .optional()
+    .isIn(['0', 'gt0'])
+    .withMessage('stock must be one of: 0, gt0'),
 ];
 
 export const createProductValidation = [

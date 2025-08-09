@@ -11,6 +11,7 @@ export const listProducts = async (
     const categoryParam = req.query.category;
     const qParam = req.query.q;
     const archivedParam = req.query.archived as string | undefined;
+    const stockParam = req.query.stock as string | undefined;
 
     const category =
       typeof categoryParam === 'string' ? categoryParam : undefined;
@@ -20,14 +21,9 @@ export const listProducts = async (
     const where = {
       isArchived: archived,
       ...(category ? { category } : {}),
-      ...(q
-        ? {
-            title: {
-              contains: q,
-              mode: 'insensitive' as const,
-            },
-          }
-        : {}),
+      ...(q ? { title: { contains: q, mode: 'insensitive' as const } } : {}),
+      ...(stockParam === '0' ? { stockQuantity: 0 } : {}),
+      ...(stockParam === 'gt0' ? { stockQuantity: { gt: 0 } } : {}),
     };
 
     const products = await prisma.product.findMany({
