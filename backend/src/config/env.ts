@@ -4,6 +4,7 @@ import z from 'zod';
 config({ path: '.env' });
 
 const envSchema = z.object({
+  JWT_SECRET: z.string().min(1),
   PORT: z.coerce
     .number()
     .positive()

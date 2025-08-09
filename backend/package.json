@@ -11,14 +11,18 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
+    "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^17.2.1",
     "express": "~4.16.1",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
     "prisma": "^6.13.0",
     "zod": "^4.0.16"
@@ -28,6 +32,7 @@
     "@tsconfig/node22": "^22.0.2",
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.2.1",
     "eslint": "^9.32.0",
     "eslint-plugin-perfectionist": "^4.15.0",
