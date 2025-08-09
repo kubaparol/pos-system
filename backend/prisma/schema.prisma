@@ -45,3 +45,18 @@ model Product {
   @@index([title])
   @@map("products")
 }
+
+model Customer {
+  id        String @id @default(uuid())
+  phone     String @unique
+  firstName String
+  lastName  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // orders Order[] // TODO: coming soon
+
+  @@index([phone])
+  @@map("customers")
+}

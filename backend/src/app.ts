@@ -3,6 +3,7 @@ import express from 'express';
 
 import authRouter from './auth/auth.route';
 import { env } from './config/env';
+import customersRouter from './customers/customers.route';
 import { errorMiddleware } from './middlewares/error.middleware';
 import productsRouter from './products/products.route';
 
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/customers', customersRouter);
 
 app.use(errorMiddleware);
 
