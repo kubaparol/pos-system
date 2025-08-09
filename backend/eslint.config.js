@@ -18,4 +18,9 @@ export default tseslint.config(
     },
   },
   perfectionist.configs['recommended-natural'],
+  {
+    rules: {
+      '@typescript-eslint/restrict-template-expressions': 'off',
+    },
+  },
 );
