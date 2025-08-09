@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 import { prisma } from '../shared/config/db';
 import { env } from '../shared/config/env';
 
+const INVALID_MSG = 'Invalid email or password';
+
 export const signIn = async (
   req: Request,
   res: Response,
@@ -20,13 +22,13 @@ export const signIn = async (
     });
 
     if (!user) {
-      throw new Error('User not found');
+      return res.status(401).json({ error: INVALID_MSG, success: false });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      return res.status(401).json({ error: INVALID_MSG, success: false });
     }
 
     const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, {
