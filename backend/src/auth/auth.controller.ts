@@ -1,0 +1,46 @@
+import bcrypt from 'bcryptjs';
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+
+import { prisma } from '../shared/config/db';
+import { env } from '../shared/config/env';
+
+const INVALID_MSG = 'Invalid email or password';
+
+export const signIn = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: INVALID_MSG, success: false });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: INVALID_MSG, success: false });
+    }
+
+    const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
+
+    res.status(200).json({
+      data: { token, userId: user.id },
+      message: 'User signed in successfully',
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

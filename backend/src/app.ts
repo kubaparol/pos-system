@@ -1,16 +1,27 @@
+import cookieParser from 'cookie-parser';
 import express from 'express';
 
-import { prisma } from './config/db';
-import { PORT } from './config/env';
+import authRouter from './auth/auth.route';
+import customersRouter from './customers/customers.route';
+import ordersRouter from './orders/orders.route';
+import productsRouter from './products/products.route';
+import { env } from './shared/config/env';
+import { authorize } from './shared/middlewares/auth.middleware';
+import { errorMiddleware } from './shared/middlewares/error.middleware';
 
 const app = express();
 
-app.get('/', async (req, res) => {
-  const users = await prisma.user.findMany();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-  res.json(users);
-});
+app.use('/api/auth', authRouter);
+app.use('/api/products', authorize, productsRouter);
+app.use('/api/customers', authorize, customersRouter);
+app.use('/api/orders', authorize, ordersRouter);
 
-app.listen(3000, () => {
-  console.log(`MyStoreAssistant API is running on port ${PORT ?? '5432'}`);
+app.use(errorMiddleware);
+
+app.listen(env.PORT, () => {
+  console.log(`Server running at http://localhost:${env.PORT}`);
 });
