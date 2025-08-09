@@ -20,12 +20,14 @@ const productsRouter = Router();
 productsRouter.get('/', listProductsValidation, validateRequest, listProducts);
 
 productsRouter.get('/:id', getProductById);
+
 productsRouter.post(
   '/',
   createProductValidation,
   validateRequest,
   createProduct,
 );
+
 productsRouter.patch(
   '/:id',
   updateProductValidation,
@@ -34,6 +36,7 @@ productsRouter.patch(
 );
 
 productsRouter.post('/:id/archive', archiveProduct);
+
 productsRouter.post('/:id/restore', restoreProduct);
 
 export default productsRouter;
