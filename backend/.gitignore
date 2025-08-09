@@ -56,10 +56,11 @@ typings/
 
 # dotenv environment variables file
 .env
-.env.*.local
 !.env.example
 
 # express.js build output
 .dist
+
+/generated/prisma
 
 /generated/prisma

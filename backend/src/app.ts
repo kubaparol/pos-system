@@ -1,11 +1,14 @@
 import express from 'express';
 
+import { prisma } from './config/db';
 import { PORT } from './config/env';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello!');
+app.get('/', async (req, res) => {
+  const users = await prisma.user.findMany();
+
+  res.json(users);
 });
 
 app.listen(3000, () => {

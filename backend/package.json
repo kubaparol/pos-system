@@ -10,16 +10,17 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
-    "-": "^0.0.1",
+    "@prisma/client": "^6.13.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^17.2.1",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
-    "save-dev": "^0.0.1-security"
+    "prisma": "^6.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
