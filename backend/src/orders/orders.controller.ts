@@ -1,8 +1,8 @@
+import { Prisma } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 
-import { Prisma } from '../../generated/prisma';
-import { prisma } from '../shared/config/db';
-import { serializeForJson } from '../shared/utils/serialize-for-json';
+import { prisma } from '../shared/config/db.js';
+import { serializeForJson } from '../shared/utils/serialize-for-json.js';
 
 interface FinalizeOrderItemInput {
   productId: string;

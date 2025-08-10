@@ -4,14 +4,14 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 
-import authRouter from './auth/auth.route';
-import customersRouter from './customers/customers.route';
-import ordersRouter from './orders/orders.route';
-import productsRouter from './products/products.route';
-import { env } from './shared/config/env';
-import { specs, swaggerUi } from './shared/config/swagger';
-import { authorize } from './shared/middlewares/auth.middleware';
-import { errorMiddleware } from './shared/middlewares/error.middleware';
+import authRouter from './auth/auth.route.js';
+import customersRouter from './customers/customers.route.js';
+import ordersRouter from './orders/orders.route.js';
+import productsRouter from './products/products.route.js';
+import { env } from './shared/config/env.js';
+import { specs, swaggerUi } from './shared/config/swagger.js';
+import { authorize } from './shared/middlewares/auth.middleware.js';
+import { errorMiddleware } from './shared/middlewares/error.middleware.js';
 
 const app = express();
 

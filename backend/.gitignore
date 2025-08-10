@@ -59,8 +59,6 @@ typings/
 !.env.example
 
 # express.js build output
-.dist
+dist
 
-/generated/prisma
-
-/generated/prisma
+src/generated/prisma

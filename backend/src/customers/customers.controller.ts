@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { prisma } from '../shared/config/db';
+import { prisma } from '../shared/config/db.js';
 
 export const getCustomerByPhone = async (
   req: Request,

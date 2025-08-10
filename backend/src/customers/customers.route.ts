@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { validateRequest } from '../shared/middlewares/validation.middleware';
-import { getCustomerByPhone } from './customers.controller';
-import { getCustomerByPhoneValidation } from './customers.validator';
-import './customers.swagger';
+import { validateRequest } from '../shared/middlewares/validation.middleware.js';
+import { getCustomerByPhone } from './customers.controller.js';
+import { getCustomerByPhoneValidation } from './customers.validator.js';
+import './customers.swagger.js';
 
 const customersRouter = Router();
 
