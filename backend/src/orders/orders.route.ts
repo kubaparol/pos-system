@@ -6,6 +6,7 @@ import {
   finalizeOrderValidation,
   listOrdersValidation,
 } from './orders.validator';
+import './orders.swagger';
 
 const ordersRouter = Router();
 

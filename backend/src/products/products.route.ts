@@ -14,6 +14,7 @@ import {
   listProductsValidation,
   updateProductValidation,
 } from './products.validator';
+import './products.swagger';
 
 const productsRouter = Router();
 
