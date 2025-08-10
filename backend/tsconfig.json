@@ -3,12 +3,12 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "outDir": "./.dist",
+    "outDir": "./dist",
     "rootDir": "./",
     "strict": true,
     "isolatedModules": true,
     "types": ["jest"]
   },
   "include": ["**/*.ts", "tests/**/*.test.ts", "jest.config.js"],
-  "exclude": [".dist"]
+  "exclude": ["dist"]
 }

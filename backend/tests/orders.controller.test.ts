@@ -1,7 +1,7 @@
+import { Prisma } from '@prisma/client';
 import express from 'express';
 import request from 'supertest';
 
-import { Prisma } from '../generated/prisma';
 import ordersRouter from '../src/orders/orders.route';
 import { prisma } from '../src/shared/config/db';
 
