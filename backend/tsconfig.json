@@ -3,8 +3,10 @@
   "compilerOptions": {
     "outDir": "./.dist",
     "rootDir": "./",
-    "strict": true
+    "strict": true,
+    "isolatedModules": true,
+    "types": ["jest"]
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "tests/**/*.test.ts", "jest.config.js"],
   "exclude": [".dist"]
 }
