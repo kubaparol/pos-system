@@ -9,6 +9,7 @@ import customersRouter from './customers/customers.route';
 import ordersRouter from './orders/orders.route';
 import productsRouter from './products/products.route';
 import { env } from './shared/config/env';
+import { specs, swaggerUi } from './shared/config/swagger';
 import { authorize } from './shared/middlewares/auth.middleware';
 import { errorMiddleware } from './shared/middlewares/error.middleware';
 
@@ -36,6 +37,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', authorize, productsRouter);
