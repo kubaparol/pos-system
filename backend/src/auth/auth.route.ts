@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { validateRequest } from '../shared/middlewares/validation.middleware';
 import { signIn } from './auth.controller';
 import { signInValidation } from './auth.validator';
+import './auth.swagger';
 
 const authRouter = Router();
 
