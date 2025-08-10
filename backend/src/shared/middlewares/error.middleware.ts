@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 
-import { isStringArray } from '../utils/is-string-array';
+import { isStringArray } from '../utils/is-string-array.js';
 
 interface ErrorResponseBody {
   error: string;

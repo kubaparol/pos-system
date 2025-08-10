@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { validateRequest } from '../shared/middlewares/validation.middleware';
-import { finalizeOrder, listOrders } from './orders.controller';
+import { validateRequest } from '../shared/middlewares/validation.middleware.js';
+import { finalizeOrder, listOrders } from './orders.controller.js';
 import {
   finalizeOrderValidation,
   listOrdersValidation,
-} from './orders.validator';
-import './orders.swagger';
+} from './orders.validator.js';
+import './orders.swagger.js';
 
 const ordersRouter = Router();
 

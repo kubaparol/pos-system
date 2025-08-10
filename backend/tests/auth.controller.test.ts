@@ -3,8 +3,8 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import request from 'supertest';
 
-import authRouter from '../src/auth/auth.route';
-import { prisma } from '../src/shared/config/db';
+import authRouter from '../src/auth/auth.route.js';
+import { prisma } from '../src/shared/config/db.js';
 
 // Mocks
 jest.mock('../src/shared/config/db', () => ({

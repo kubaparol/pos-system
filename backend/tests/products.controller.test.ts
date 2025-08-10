@@ -1,8 +1,8 @@
 import express from 'express';
 import request from 'supertest';
 
-import productsRouter from '../src/products/products.route';
-import { prisma } from '../src/shared/config/db';
+import productsRouter from '../src/products/products.route.js';
+import { prisma } from '../src/shared/config/db.js';
 
 // Mocks
 jest.mock('../src/shared/config/db', () => ({

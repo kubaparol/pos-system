@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { validateRequest } from '../shared/middlewares/validation.middleware';
+import { validateRequest } from '../shared/middlewares/validation.middleware.js';
 import {
   archiveProduct,
   createProduct,
@@ -8,13 +8,13 @@ import {
   listProducts,
   restoreProduct,
   updateProduct,
-} from './products.controller';
+} from './products.controller.js';
 import {
   createProductValidation,
   listProductsValidation,
   updateProductValidation,
-} from './products.validator';
-import './products.swagger';
+} from './products.validator.js';
+import './products.swagger.js';
 
 const productsRouter = Router();
 

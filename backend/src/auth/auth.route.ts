@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { validateRequest } from '../shared/middlewares/validation.middleware';
-import { signIn } from './auth.controller';
-import { signInValidation } from './auth.validator';
-import './auth.swagger';
+import { validateRequest } from '../shared/middlewares/validation.middleware.js';
+import { signIn } from './auth.controller.js';
+import { signInValidation } from './auth.validator.js';
+import './auth.swagger.js';
 
 const authRouter = Router();
 

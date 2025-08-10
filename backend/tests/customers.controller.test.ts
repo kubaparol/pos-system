@@ -1,8 +1,8 @@
 import express from 'express';
 import request from 'supertest';
 
-import customersRouter from '../src/customers/customers.route';
-import { prisma } from '../src/shared/config/db';
+import customersRouter from '../src/customers/customers.route.js';
+import { prisma } from '../src/shared/config/db.js';
 
 // Mocks
 jest.mock('../src/shared/config/db', () => {

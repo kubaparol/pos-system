@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { prisma } from '../shared/config/db';
-import { env } from '../shared/config/env';
+import { prisma } from '../shared/config/db.js';
+import { env } from '../shared/config/env.js';
 
 const INVALID_MSG = 'Invalid email or password';
 

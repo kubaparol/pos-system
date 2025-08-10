@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import request from 'supertest';
 
-import { authorize } from '../src/shared/middlewares/auth.middleware';
+import { authorize } from '../src/shared/middlewares/auth.middleware.js';
 
 // Mocks
 jest.mock('jsonwebtoken');
