@@ -5,21 +5,21 @@ import { BaseLayout } from '@/components/layouts/BaseLayout';
 
 import { SignInView } from '@/modules/auth/ui/views/sign-in-view';
 
-import { AppUrls } from './constants';
+import { pathKeys } from './path-keys';
 
 const authRoutes: RouteObject = {
-  path: AppUrls.auth,
+  path: pathKeys.auth,
   element: <AuthLayout />,
   children: [
     {
-      path: AppUrls.signIn,
+      path: pathKeys.signIn,
       element: <SignInView />,
     },
   ],
 };
 
 const appRoutes: RouteObject = {
-  path: AppUrls.home,
+  path: pathKeys.home,
   element: <BaseLayout />,
   children: [
     {

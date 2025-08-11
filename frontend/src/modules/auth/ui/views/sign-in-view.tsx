@@ -1,14 +1,25 @@
 import { Store } from 'lucide-react';
+import { toast } from 'sonner';
+
+import type { SignInDto } from '@/api/api.types';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-import { SignInForm, type SignInFormValues } from '../components/sign-in-form';
+import { handleError } from '@/utils';
+
+import { useLoginMutation } from '../../api/login.mutation';
+import { SignInForm } from '../components/sign-in-form';
 
 export const SignInView = () => {
-  const handleSignIn = async (values: SignInFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  const { mutateAsync: loginUser } = useLoginMutation();
 
-    console.log(values);
+  const handleSignIn = async (values: SignInDto) => {
+    try {
+      await loginUser(values);
+      toast.success('Zalogowano pomyślnie');
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (

@@ -1,7 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, Lock, Mail } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+
+import { SignInDtoSchema } from '@/api/api.contracts';
+import type { SignInDto } from '@/api/api.types';
 
 import { PasswordInput } from '@/components/base/PasswordInput';
 import { Button } from '@/components/ui/button';
@@ -16,19 +18,12 @@ import {
 import { Input } from '@/components/ui/input';
 
 interface SignInFormProps {
-  onFormSubmit: (values: SignInFormValues) => void;
+  onFormSubmit: (values: SignInDto) => void;
 }
 
-const SignInFormSchema = z.object({
-  email: z.email('Nieprawidłowy adres e-mail'),
-  password: z.string().min(1, 'Hasło jest wymagane'),
-});
-
-export type SignInFormValues = z.infer<typeof SignInFormSchema>;
-
 export const SignInForm = ({ onFormSubmit }: SignInFormProps) => {
-  const form = useForm<SignInFormValues>({
-    resolver: zodResolver(SignInFormSchema),
+  const form = useForm<SignInDto>({
+    resolver: zodResolver(SignInDtoSchema),
     defaultValues: {
       email: '',
       password: '',
