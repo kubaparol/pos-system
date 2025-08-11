@@ -1,16 +1,13 @@
-import {
-  type RouteObject,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
-import { BaseLayout } from "@/components/layouts/BaseLayout";
+import { type RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { BaseLayout } from '@/components/layouts/BaseLayout';
 
 const routes: RouteObject = {
-  path: "/",
+  path: '/',
   element: <BaseLayout />,
   children: [
     {
-      path: "",
+      path: '',
       element: <div>First Page</div>,
     },
   ],
