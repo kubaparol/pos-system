@@ -19,5 +19,7 @@ export const useMeQuery = () => {
   return useQuery<AxiosResponse<UserResponse>, Error>({
     ...getMeQuery(),
     enabled: hasToken,
+    retry: false,
+    staleTime: Infinity,
   });
 };
