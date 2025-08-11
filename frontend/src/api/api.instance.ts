@@ -1,8 +1,21 @@
 import axios, { AxiosError } from 'axios';
 
+import { accessTokenCookie } from '@/lib/cookies';
+
 import { ApiErrorDataDtoSchema } from './api.contracts';
 
 export const api = axios.create({ baseURL: import.meta.env.VITE_API_URL });
+
+api.interceptors.request.use(
+  (config) => {
+    const token = accessTokenCookie.get();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 api.interceptors.response.use(
   (response) => response,

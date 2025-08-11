@@ -23,3 +23,12 @@ export interface SignInResponseData {
 }
 
 export type SignInResponse = ApiResponse<SignInResponseData>;
+
+export interface UserResponseData {
+  createdAt: string;
+  email: string;
+  id: string;
+  updatedAt: string;
+}
+
+export type UserResponse = ApiResponse<UserResponseData>;

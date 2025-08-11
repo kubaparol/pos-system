@@ -5,7 +5,9 @@ import { BaseLayout } from '@/components/layouts/BaseLayout';
 
 import { SignInView } from '@/modules/auth/ui/views/sign-in-view';
 
+import { NonLoggedInRoute } from './non-logged-in-route';
 import { pathKeys } from './path-keys';
+import { ProtectedRoute } from './protected-route';
 
 const authRoutes: RouteObject = {
   path: pathKeys.auth,
@@ -13,7 +15,13 @@ const authRoutes: RouteObject = {
   children: [
     {
       path: pathKeys.signIn,
-      element: <SignInView />,
+      element: <NonLoggedInRoute />,
+      children: [
+        {
+          path: pathKeys.signIn,
+          element: <SignInView />,
+        },
+      ],
     },
   ],
 };
@@ -24,7 +32,13 @@ const appRoutes: RouteObject = {
   children: [
     {
       path: '',
-      element: <div>Home Page</div>,
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: pathKeys.home,
+          element: <div>Home Page</div>,
+        },
+      ],
     },
   ],
 };

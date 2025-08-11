@@ -8,3 +8,7 @@ export const signIn = (signInDto: SignInDto, config?: AxiosRequestConfig) => {
   const data = SignInDtoSchema.parse(signInDto);
   return api.post('/auth/sign-in', data, config);
 };
+
+export const me = (config?: AxiosRequestConfig) => {
+  return api.get('/users/me', config);
+};
