@@ -4,6 +4,7 @@ import { AuthLayout } from '@/components/layouts/auth-layout';
 import { BaseLayout } from '@/components/layouts/base-layout';
 
 import { SignInView } from '@/modules/auth/ui/views/sign-in-view';
+import { ArchivedProductsView } from '@/modules/products/ui/views/archived-products-view';
 import { ProductsView } from '@/modules/products/ui/views/products-view';
 
 import { pathKeys } from './path-keys';
@@ -35,6 +36,10 @@ const appRoutes: RouteObject = {
         {
           path: pathKeys.products,
           element: <ProductsView />,
+        },
+        {
+          path: pathKeys.archivedProducts,
+          element: <ArchivedProductsView />,
         },
       ],
     },

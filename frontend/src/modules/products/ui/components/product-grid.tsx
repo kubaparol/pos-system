@@ -4,7 +4,11 @@ import { useSearchParams } from 'react-router-dom';
 import { useProductsQuery } from '../../api/products.query';
 import { ProductCard, ProductCardSkeleton } from '../components/product-card';
 
-export const ProductGrid = () => {
+interface ProductGridProps {
+  archived?: boolean;
+}
+
+export const ProductGrid = ({ archived }: ProductGridProps) => {
   const [searchParams] = useSearchParams();
 
   const params = {
@@ -13,6 +17,7 @@ export const ProductGrid = () => {
       searchParams.get('category') === 'all'
         ? undefined
         : searchParams.get('category') || undefined,
+    archived: archived || undefined,
   };
 
   const filteredParams = Object.fromEntries(

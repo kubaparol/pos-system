@@ -10,6 +10,7 @@ export const PRODUCTS_QUERY_KEY = 'products';
 interface ProductsQueryParams {
   q?: string;
   category?: string;
+  archived?: boolean;
 }
 
 export const useProductsQuery = (params?: ProductsQueryParams) => {

@@ -1,4 +1,4 @@
-import { LogOut, type LucideIcon, Package } from 'lucide-react';
+import { Archive, LogOut, type LucideIcon, Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -26,11 +26,17 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
 
   return [
     {
-      title: 'Products',
+      title: 'Produkty',
       icon: Package,
       url: pathKeys.products,
     },
+    {
+      title: 'Archiwum',
+      icon: Archive,
+      url: pathKeys.archivedProducts,
+    },
 
+    // Bottom items
     {
       title: 'Logout',
       icon: LogOut,
