@@ -10,7 +10,7 @@ import type { ArchiveProductResponse } from './types';
 
 export const useArchiveProductMutation = () => {
   return useMutation<AxiosResponse<ArchiveProductResponse>, Error, string>({
-    mutationFn: (productId: string) => archiveProduct(productId),
+    mutationFn: (productId) => archiveProduct(productId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [PRODUCTS_QUERY_KEY] });
     },

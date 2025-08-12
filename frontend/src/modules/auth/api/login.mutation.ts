@@ -16,7 +16,7 @@ export const useLoginMutation = () => {
   const navigate = useNavigate();
 
   return useMutation<AxiosResponse<SignInResponse>, Error, SignInDto>({
-    mutationFn: (data: SignInDto) => signIn(data),
+    mutationFn: (data) => signIn(data),
     onSuccess: async (response) => {
       const { token } = response.data.data;
       accessTokenCookie.set(token);

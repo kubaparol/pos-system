@@ -27,6 +27,8 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
 
+import { useCartStore } from '@/modules/orders/store/use-cart-store';
+
 import { useCategoriesQuery } from '../../api/categories.query';
 import type { ProductEditDto, ProductResponseData } from '../../api/types';
 
@@ -44,6 +46,8 @@ export const ProductEditDialog = ({
   onFormSubmit,
 }: ProductEditDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { syncWithProduct } = useCartStore();
+
   const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
 
   const form = useForm<ProductEditDto>({
@@ -63,6 +67,11 @@ export const ProductEditDialog = ({
   const onSubmit = async (values: ProductEditDto) => {
     setIsLoading(true);
     await onFormSubmit(values);
+    syncWithProduct(product.id, {
+      title: values.title,
+      price: values.price.toString(),
+      stockQuantity: values.stockQuantity,
+    });
     setIsLoading(false);
   };
 

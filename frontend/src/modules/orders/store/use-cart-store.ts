@@ -147,7 +147,7 @@ export const useCartStore = create<CartState>()(
         });
 
         if (removedItems.length > 0) {
-          toast.error(`Następujące produkty zostały zarchiwizowane: ${removedItems.join(', ')}`, {
+          toast.warning(`Następujące produkty zostały zarchiwizowane: ${removedItems.join(', ')}`, {
             description: 'Produkty zostały usunięte z koszyka',
           });
         }

@@ -20,3 +20,25 @@ export const ProductEditDtoSchema = z.object({
   reviewRating: z.number().min(0).max(5),
   reviewCount: z.number().int().min(0),
 });
+
+export const OrderFormDtoSchema = z.object({
+  phone: z.string().regex(/^\d{9}$/, 'Numer telefonu musi składać się z 9 cyfr'),
+  firstName: z.string().min(1, 'Imię jest wymagane'),
+  lastName: z.string().min(1, 'Nazwisko jest wymagane'),
+  note: z.string().optional(),
+});
+
+export const OrderDtoSchema = z.object({
+  customer: z.object({
+    firstName: z.string().min(1, 'Imię jest wymagane'),
+    lastName: z.string().min(1, 'Nazwisko jest wymagane'),
+    phone: z.string().regex(/^\d{9}$/, 'Numer telefonu musi składać się z 9 cyfr'),
+  }),
+  items: z.array(
+    z.object({
+      productId: z.string(),
+      quantity: z.number().int().min(1, 'Ilość musi być liczbą całkowitą większą lub równą 1'),
+    }),
+  ),
+  note: z.string().optional(),
+});

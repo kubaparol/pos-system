@@ -165,7 +165,7 @@ export const finalizeOrder = async (
         },
       });
 
-      return createdOrder;
+      return { ...createdOrder, orderNumber: createdOrder.id };
     });
 
     res.status(201).json({

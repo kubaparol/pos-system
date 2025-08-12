@@ -14,6 +14,7 @@ import {
 
 import { useCartStore } from '../../store/use-cart-store';
 import { CartItem } from './cart-item';
+import { OrderForm } from './order-form';
 
 export const CartDrawer = () => {
   const { items, getTotalPrice, getTotalItems } = useCartStore();
@@ -23,10 +24,10 @@ export const CartDrawer = () => {
   const totalPrice = getTotalPrice();
   const totalItems = getTotalItems();
 
-  // const handleSuccess = () => {
-  //   setShowOrderForm(false);
-  //   setOpen(false);
-  // };
+  const handleSuccess = () => {
+    setShowOrderForm(false);
+    setOpen(false);
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -62,9 +63,8 @@ export const CartDrawer = () => {
               </div>
             </div>
           ) : showOrderForm ? (
-            <div>OrderForm</div>
+            <OrderForm onBack={() => setShowOrderForm(false)} onSuccess={handleSuccess} />
           ) : (
-            // <OrderForm onBack={() => setShowOrderForm(false)} onSuccess={handleSuccess} />
             <div className="space-y-4">
               <div className="space-y-3 max-h-64 overflow-y-auto">
                 {items.map((item) => (

@@ -9,6 +9,7 @@ import { formatCurrency } from '@/utils';
 
 import { useCartStore } from '../../store/use-cart-store';
 import { CartItem } from './cart-item';
+import { OrderForm } from './order-form';
 
 export const CartPanel = () => {
   const { items, getTotalPrice, getTotalItems } = useCartStore();
@@ -35,8 +36,9 @@ export const CartPanel = () => {
   }
 
   if (showOrderForm) {
-    return <p>OrderForm</p>;
-    // return <OrderForm onBack={() => setShowOrderForm(false)} onSuccess={() => setShowOrderForm(false)} />
+    return (
+      <OrderForm onBack={() => setShowOrderForm(false)} onSuccess={() => setShowOrderForm(false)} />
+    );
   }
 
   return (
@@ -48,7 +50,7 @@ export const CartPanel = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-3 max-h-96 overflow-y-auto">
+        <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
           {items.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}

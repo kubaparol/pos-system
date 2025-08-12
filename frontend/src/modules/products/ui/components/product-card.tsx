@@ -37,7 +37,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const { addItem } = useCartStore();
+  const { addItem, removeArchivedItems } = useCartStore();
   const [showArchiveDialog, setShowArchiveDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         toast.success('Produkt został przywrócony');
       } else {
         await archiveProduct(product.id);
+        removeArchivedItems([product.id]);
         toast.success('Produkt został zarchiwizowany');
       }
     } catch (error) {
