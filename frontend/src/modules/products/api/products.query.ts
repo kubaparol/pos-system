@@ -11,6 +11,7 @@ interface ProductsQueryParams {
   q?: string;
   category?: string;
   archived?: boolean;
+  sort?: string;
 }
 
 export const useProductsQuery = (params?: ProductsQueryParams) => {

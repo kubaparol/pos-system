@@ -11,6 +11,21 @@ export const listProductsValidation = [
     .optional()
     .isIn(['0', 'gt0'])
     .withMessage('stock must be one of: 0, gt0'),
+  query('sort')
+    .optional()
+    .isIn([
+      'name-asc',
+      'name-desc',
+      'price-asc',
+      'price-desc',
+      'stock-asc',
+      'stock-desc',
+      'category-asc',
+      'category-desc',
+    ])
+    .withMessage(
+      'sort must be one of: name-asc, name-desc, price-asc, price-desc, stock-asc, stock-desc, category-asc, category-desc',
+    ),
 ];
 
 export const createProductValidation = [

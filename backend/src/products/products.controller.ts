@@ -12,6 +12,7 @@ export const listProducts = async (
     const qParam = req.query.q;
     const archivedParam = req.query.archived as string | undefined;
     const stockParam = req.query.stock as string | undefined;
+    const sortParam = req.query.sort as string | undefined;
 
     const category =
       typeof categoryParam === 'string' ? categoryParam : undefined;
@@ -26,8 +27,42 @@ export const listProducts = async (
       ...(stockParam === 'gt0' ? { stockQuantity: { gt: 0 } } : {}),
     };
 
+    let orderBy: Record<string, 'asc' | 'desc'> = { title: 'asc' };
+
+    if (sortParam) {
+      switch (sortParam) {
+        case 'category-asc':
+          orderBy = { category: 'asc' };
+          break;
+        case 'category-desc':
+          orderBy = { category: 'desc' };
+          break;
+        case 'name-asc':
+          orderBy = { title: 'asc' };
+          break;
+        case 'name-desc':
+          orderBy = { title: 'desc' };
+          break;
+        case 'price-asc':
+          orderBy = { price: 'asc' };
+          break;
+        case 'price-desc':
+          orderBy = { price: 'desc' };
+          break;
+        case 'stock-asc':
+          orderBy = { stockQuantity: 'asc' };
+          break;
+        case 'stock-desc':
+          orderBy = { stockQuantity: 'desc' };
+          break;
+
+        default:
+          orderBy = { title: 'asc' };
+      }
+    }
+
     const products = await prisma.product.findMany({
-      orderBy: { title: 'asc' },
+      orderBy,
       where,
     });
 

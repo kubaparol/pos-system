@@ -17,12 +17,13 @@ export const ProductGrid = ({ archived }: ProductGridProps) => {
       searchParams.get('category') === 'all'
         ? undefined
         : searchParams.get('category') || undefined,
+    sort: searchParams.get('sort') || undefined,
     archived: archived || undefined,
   };
 
   const filteredParams = Object.fromEntries(
     Object.entries(params).filter(([, value]) => value !== undefined),
-  ) as { q?: string; category?: string };
+  ) as { q?: string; category?: string; sort?: string };
 
   const { data: productsData, isLoading } = useProductsQuery(
     Object.keys(filteredParams).length > 0 ? filteredParams : undefined,

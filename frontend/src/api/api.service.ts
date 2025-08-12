@@ -16,7 +16,7 @@ export const me = (config?: AxiosRequestConfig) => {
 };
 
 export const getProducts = (
-  params?: { q?: string; category?: string },
+  params?: { q?: string; category?: string; sort?: string },
   config?: AxiosRequestConfig,
 ) => {
   return api.get('/products', { ...config, params });
