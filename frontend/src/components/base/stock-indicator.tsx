@@ -36,9 +36,9 @@ export const StockIndicator = ({ stockQuantity, className }: StockIndicatorProps
       case 'medium':
         return {
           bars: 2,
-          color: 'bg-orange-500',
+          color: 'bg-yellow-400',
           label: 'Średnia',
-          textColor: 'text-orange-600',
+          textColor: 'text-yellow-600',
         };
       case 'high':
         return {

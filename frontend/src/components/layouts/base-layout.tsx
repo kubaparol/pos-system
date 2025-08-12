@@ -11,7 +11,9 @@ import { Separator } from '../ui/separator';
 
 const TITLES: Record<string, string> = {
   [pathKeys.home]: 'Dashboard',
-  [pathKeys.products]: 'Products',
+  [pathKeys.products]: 'Produkty',
+  [pathKeys.archivedProducts]: 'Archiwum',
+  [pathKeys.orders]: 'Zamówienia',
 } as const;
 
 export const BaseLayout = () => {
@@ -24,7 +26,7 @@ export const BaseLayout = () => {
     <SidebarProvider>
       <AppSidebar />
       <div className="flex flex-col min-h-screen w-full">
-        <header className="border-b w-full px-4 py-2 flex items-center justify-between">
+        <header className="border-b w-full px-4 py-2 flex items-center justify-between sticky top-0 bg-background z-10">
           <div className="flex w-full items-center gap-1">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 !h-4" />

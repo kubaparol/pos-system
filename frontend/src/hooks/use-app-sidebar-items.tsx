@@ -31,6 +31,11 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
       url: pathKeys.products,
     },
     {
+      title: 'Zamówienia',
+      icon: Package,
+      url: pathKeys.orders,
+    },
+    {
       title: 'Archiwum',
       icon: Archive,
       url: pathKeys.archivedProducts,
@@ -38,7 +43,7 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
 
     // Bottom items
     {
-      title: 'Logout',
+      title: 'Wyloguj',
       icon: LogOut,
       onClick: logout,
     },

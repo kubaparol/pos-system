@@ -31,7 +31,7 @@ export const ProductGrid = ({ archived }: ProductGridProps) => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <ProductCardSkeleton key={i} />
         ))}
@@ -40,11 +40,15 @@ export const ProductGrid = ({ archived }: ProductGridProps) => {
   }
 
   if (productsData?.data.data.length === 0) {
-    return <EmptyState />;
+    return (
+      <>
+        <EmptyState />
+      </>
+    );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-4">
       {productsData?.data.data.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

@@ -199,6 +199,7 @@
  *             valid_request:
  *               summary: Valid order finalization
  *               value:
+ *                 orderNumber: "1001"
  *                 customer:
  *                   firstName: "John"
  *                   lastName: "Doe"

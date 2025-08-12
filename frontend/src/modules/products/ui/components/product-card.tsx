@@ -23,7 +23,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { handleError } from '@/utils';
+import { useCartStore } from '@/modules/orders/store/use-cart-store';
+import { formatCurrency, handleError } from '@/utils';
 
 import { useArchiveProductMutation } from '../../api/archive.mutation';
 import { useEditProductMutation } from '../../api/edit.mutation';
@@ -36,6 +37,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { addItem, removeArchivedItems } = useCartStore();
   const [showArchiveDialog, setShowArchiveDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +52,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const handleAddToCart = () => {
     if (!canAddToCart) return;
 
-    toast.success(`${product.title} został dodany do koszyka`);
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      stockQuantity: product.stockQuantity,
+      imageUrl: product.imageUrl,
+    });
   };
 
   const handleArchiveToggle = async () => {
@@ -62,6 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         toast.success('Produkt został przywrócony');
       } else {
         await archiveProduct(product.id);
+        removeArchivedItems([product.id]);
         toast.success('Produkt został zarchiwizowany');
       }
     } catch (error) {
@@ -159,8 +168,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <p className="text-xl font-bold text-green-600">
-                  {Number(product.price).toFixed(2)}{' '}
-                  <span className="text-sm font-normal">PLN</span>
+                  {formatCurrency(Number(product.price))}
                 </p>
               </div>
             </div>

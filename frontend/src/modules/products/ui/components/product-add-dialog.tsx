@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ProductEditDtoSchema } from '@/api/api.contracts';
+import { ProductCreateDtoSchema } from '@/api/api.contracts';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -27,59 +27,46 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
 
-import { useCartStore } from '@/modules/orders/store/use-cart-store';
-
 import { useCategoriesQuery } from '../../api/categories.query';
-import type { ProductEditDto, ProductResponseData } from '../../api/types';
+import type { ProductCreateDto } from '../../api/types';
 
-interface ProductEditDialogProps {
-  product: ProductResponseData;
+interface ProductAddDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onFormSubmit: (values: ProductEditDto) => Promise<void>;
+  onFormSubmit: (values: ProductCreateDto) => Promise<void>;
 }
 
-export const ProductEditDialog = ({
-  product,
-  open,
-  onOpenChange,
-  onFormSubmit,
-}: ProductEditDialogProps) => {
+export const ProductAddDialog = ({ open, onOpenChange, onFormSubmit }: ProductAddDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { syncWithProduct } = useCartStore();
 
   const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
 
-  const form = useForm<ProductEditDto>({
-    resolver: zodResolver(ProductEditDtoSchema),
+  const form = useForm<ProductCreateDto>({
+    resolver: zodResolver(ProductCreateDtoSchema),
     defaultValues: {
-      title: product.title,
-      category: product.category,
-      description: product.description,
-      imageUrl: product.imageUrl || '',
-      price: Number(product.price),
-      stockQuantity: product.stockQuantity,
-      reviewRating: Number(product.reviewRating),
-      reviewCount: product.reviewCount,
+      title: '',
+      category: '',
+      description: '',
+      imageUrl: undefined,
+      price: 0,
+      stockQuantity: 0,
+      isArchived: false,
     },
   });
 
-  const onSubmit = async (values: ProductEditDto) => {
+  const onSubmit = async (values: ProductCreateDto) => {
     setIsLoading(true);
     await onFormSubmit(values);
-    syncWithProduct(product.id, {
-      title: values.title,
-      price: values.price.toString(),
-      stockQuantity: values.stockQuantity,
-    });
     setIsLoading(false);
+    form.reset();
+    onOpenChange(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edytuj produkt</DialogTitle>
+          <DialogTitle>Dodaj nowy produkt</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -138,9 +125,9 @@ export const ProductEditDialog = ({
                       type="number"
                       min="1"
                       step="0.01"
-                      placeholder="0.00"
+                      placeholder="1.00"
                       value={field.value || ''}
-                      onChange={(e) => field.onChange(Number.parseFloat(e.target.value) || 0)}
+                      onChange={(e) => field.onChange(Number.parseFloat(e.target.value) || 1)}
                     />
                   </FormControl>
                   <FormMessage />
@@ -212,10 +199,10 @@ export const ProductEditDialog = ({
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Zapisywanie...
+                    Dodawanie...
                   </>
                 ) : (
-                  'Zapisz'
+                  'Dodaj'
                 )}
               </Button>
             </div>
