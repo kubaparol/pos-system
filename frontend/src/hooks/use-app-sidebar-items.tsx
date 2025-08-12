@@ -1,4 +1,4 @@
-import { Archive, LogOut, type LucideIcon, Package } from 'lucide-react';
+import { Archive, Home, LogOut, type LucideIcon, Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -25,6 +25,11 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
   };
 
   return [
+    {
+      title: 'Strona główna',
+      icon: Home,
+      url: pathKeys.dashboard,
+    },
     {
       title: 'Produkty',
       icon: Package,

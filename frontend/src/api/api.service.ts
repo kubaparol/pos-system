@@ -67,3 +67,7 @@ export const finalizeOrder = (FinalizeOrderDto: FinalizeOrderDto, config?: Axios
 export const searchCustomerByPhone = (phone: string, config?: AxiosRequestConfig) => {
   return api.get(`/customers/search?phone=${phone}`, config);
 };
+
+export const getDashboardStats = (params?: { limit?: number }, config?: AxiosRequestConfig) => {
+  return api.get('/dashboard/stats', { ...config, params });
+};

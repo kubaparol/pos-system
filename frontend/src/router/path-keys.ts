@@ -1,5 +1,5 @@
 export const pathKeys = {
-  home: '/',
+  dashboard: '/',
   auth: '/auth',
   signIn: '/auth/sign-in',
   products: '/products',

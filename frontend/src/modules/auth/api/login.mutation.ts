@@ -21,7 +21,7 @@ export const useLoginMutation = () => {
       const { token } = response.data.data;
       accessTokenCookie.set(token);
       await queryClient.fetchQuery(getMeQuery());
-      navigate(pathKeys.home);
+      navigate(pathKeys.dashboard);
     },
   });
 };
