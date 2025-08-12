@@ -4,9 +4,9 @@ import type { AxiosResponse } from 'axios';
 import { queryClient } from '@/lib/query-client';
 
 import { editProduct } from '@/api/api.service';
-import type { ProductEditDto, ProductEditResponse } from '@/api/api.types';
 
 import { PRODUCTS_QUERY_KEY } from './products.query';
+import type { ProductEditDto, ProductEditResponse } from './types';
 
 export const useEditProductMutation = () => {
   return useMutation<

@@ -1,8 +1,10 @@
 import type { AxiosRequestConfig } from 'axios';
 
+import type { SignInDto } from '@/modules/auth/api/types';
+import type { ProductEditDto } from '@/modules/products/api/types';
+
 import { ProductEditDtoSchema, SignInDtoSchema } from './api.contracts';
 import { api } from './api.instance';
-import type { ProductEditDto, SignInDto } from './api.types';
 
 export const signIn = (signInDto: SignInDto, config?: AxiosRequestConfig) => {
   const data = SignInDtoSchema.parse(signInDto);

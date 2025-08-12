@@ -1,11 +1,11 @@
-// Generic API response structure
+// Shared API types
+
 export interface ApiResponse<T = unknown> {
   data: T;
   message: string;
   success: boolean;
 }
 
-// Error response structure
 export interface ApiErrorResponse {
   error: string;
   success: false;

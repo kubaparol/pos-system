@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ProductEditDtoSchema } from '@/api/api.contracts';
-import type { ProductEditDto, ProductResponseData } from '@/api/api.types';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -19,6 +18,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+
+import type { ProductEditDto, ProductResponseData } from '../../api/types';
 
 interface ProductEditDialogProps {
   product: ProductResponseData;

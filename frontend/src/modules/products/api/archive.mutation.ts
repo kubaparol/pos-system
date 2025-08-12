@@ -4,9 +4,9 @@ import type { AxiosResponse } from 'axios';
 import { queryClient } from '@/lib/query-client';
 
 import { archiveProduct } from '@/api/api.service';
-import type { ArchiveProductResponse } from '@/api/api.types';
 
 import { PRODUCTS_QUERY_KEY } from './products.query';
+import type { ArchiveProductResponse } from './types';
 
 export const useArchiveProductMutation = () => {
   return useMutation<AxiosResponse<ArchiveProductResponse>, Error, string>({

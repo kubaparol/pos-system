@@ -2,8 +2,6 @@ import { Archive, ArchiveRestore, Edit, MoreVertical, Plus, ShoppingCart } from 
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import type { ProductEditDto, ProductResponseData } from '@/api/api.types';
-
 import { StockIndicator } from '@/components/base/stock-indicator';
 import {
   AlertDialog,
@@ -30,6 +28,7 @@ import { handleError } from '@/utils';
 import { useArchiveProductMutation } from '../../api/archive.mutation';
 import { useEditProductMutation } from '../../api/edit.mutation';
 import { useRestoreProductMutation } from '../../api/restore.mutation';
+import type { ProductEditDto, ProductResponseData } from '../../api/types';
 import { ProductEditDialog } from './product-edit-dialog';
 
 interface ProductCardProps {
