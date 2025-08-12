@@ -1,3 +1,6 @@
+import { CartDrawer } from '@/modules/orders/ui/components/cart-drawer';
+import { CartPanel } from '@/modules/orders/ui/components/cart-panel';
+
 import { ProductFilters } from '../components/product-filters';
 import { ProductGrid } from '../components/product-grid';
 
@@ -12,13 +15,15 @@ export const ProductsView = () => {
         </div>
 
         {/* Desktop cart panel */}
-        {/* <div className="hidden lg:block w-80 sticky top-6 h-fit">
+        <div className="hidden lg:block w-80 sticky top-6 h-fit">
           <CartPanel />
-        </div> */}
+        </div>
       </div>
 
       {/* Mobile cart drawer - pozycjonowany absolutnie */}
-      <div className="lg:hidden fixed bottom-4 right-4 z-50">{/* <CartDrawer /> */}</div>
+      <div className="lg:hidden fixed bottom-4 right-4 z-50">
+        <CartDrawer />
+      </div>
     </>
   );
 };

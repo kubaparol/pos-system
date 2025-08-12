@@ -11,7 +11,8 @@ import { Separator } from '../ui/separator';
 
 const TITLES: Record<string, string> = {
   [pathKeys.home]: 'Dashboard',
-  [pathKeys.products]: 'Products',
+  [pathKeys.products]: 'Produkty',
+  [pathKeys.archivedProducts]: 'Archiwum',
 } as const;
 
 export const BaseLayout = () => {
