@@ -27,7 +27,7 @@ export const listProducts = async (
       ...(stockParam === 'gt0' ? { stockQuantity: { gt: 0 } } : {}),
     };
 
-    let orderBy: Record<string, 'asc' | 'desc'> = { title: 'asc' };
+    let orderBy: Record<string, 'asc' | 'desc'> = { createdAt: 'asc' };
 
     if (sortParam) {
       switch (sortParam) {
@@ -57,7 +57,7 @@ export const listProducts = async (
           break;
 
         default:
-          orderBy = { title: 'asc' };
+          orderBy = { createdAt: 'asc' };
       }
     }
 
