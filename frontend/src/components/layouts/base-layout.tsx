@@ -5,8 +5,8 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 
 import { pathKeys } from '@/router/path-keys';
 
-import { AppSidebar } from '../base/AppSidebar';
-import { useAuthContext } from '../providers/auth/AuthProvider.context';
+import { AppSidebar } from '../base/app-sidebar';
+import { useAuthContext } from '../providers/auth/auth-provider.context';
 import { Separator } from '../ui/separator';
 
 const TITLES: Record<string, string> = {

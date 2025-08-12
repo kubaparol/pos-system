@@ -2,7 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AuthProvider } from './components/providers/auth/AuthProvider.tsx';
+import { AuthProvider } from './components/providers/auth/auth-provider.tsx';
 import { Toaster } from './components/ui/sonner.tsx';
 import { queryClient } from './lib/query-client.ts';
 import { Routes } from './router/index.tsx';

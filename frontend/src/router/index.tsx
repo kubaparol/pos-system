@@ -1,7 +1,7 @@
 import { type RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { AuthLayout } from '@/components/layouts/AuthLayout';
-import { BaseLayout } from '@/components/layouts/BaseLayout';
+import { AuthLayout } from '@/components/layouts/auth-layout';
+import { BaseLayout } from '@/components/layouts/base-layout';
 
 import { SignInView } from '@/modules/auth/ui/views/sign-in-view';
 import { ProductsView } from '@/modules/products/ui/views/products-view';

@@ -2,7 +2,7 @@ import { type ReactNode, useMemo } from 'react';
 
 import { useMeQuery } from '@/modules/users/api/me.query';
 
-import { AuthContext } from './AuthProvider.context';
+import { AuthContext } from './auth-provider.context';
 
 interface AuthProviderProps {
   children: ReactNode;

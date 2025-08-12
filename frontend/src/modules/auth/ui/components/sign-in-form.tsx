@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { SignInDtoSchema } from '@/api/api.contracts';
 
-import { PasswordInput } from '@/components/base/PasswordInput';
+import { PasswordInput } from '@/components/base/password-input';
 import { Button } from '@/components/ui/button';
 import {
   Form,
