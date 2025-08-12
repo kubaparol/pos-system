@@ -1,3 +1,4 @@
+import { ShoppingCart } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useAppSidebarItems } from '@/hooks/use-app-sidebar-items';
@@ -13,6 +14,8 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 
+import { pathKeys } from '@/router/path-keys';
+
 import { Button } from '../ui/button';
 
 export const AppSidebar = () => {
@@ -26,6 +29,13 @@ export const AppSidebar = () => {
   return (
     <Sidebar>
       <SidebarContent>
+        <div className="flex h-16 items-center px-6">
+          <Link to={pathKeys.home} className="flex items-center gap-2 font-semibold">
+            <ShoppingCart className="size-5" />
+            <span>POS System</span>
+          </Link>
+        </div>
+
         <SidebarGroup className="h-full">
           <SidebarGroupLabel>Platforma</SidebarGroupLabel>
 

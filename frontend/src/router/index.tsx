@@ -4,6 +4,7 @@ import { AuthLayout } from '@/components/layouts/AuthLayout';
 import { BaseLayout } from '@/components/layouts/BaseLayout';
 
 import { SignInView } from '@/modules/auth/ui/views/sign-in-view';
+import { ProductsView } from '@/modules/products/ui/views/products-view';
 
 import { pathKeys } from './path-keys';
 import { ProtectedRoute } from './protected-route';
@@ -30,6 +31,10 @@ const appRoutes: RouteObject = {
         {
           path: pathKeys.home,
           element: <div>Home Page</div>,
+        },
+        {
+          path: pathKeys.products,
+          element: <ProductsView />,
         },
       ],
     },
