@@ -15,10 +15,20 @@ export const ProductEditDtoSchema = z.object({
   category: z.string().min(1, 'Kategoria jest wymagana'),
   description: z.string(),
   imageUrl: z.url('Nieprawidłowy URL').or(z.literal('')),
-  price: z.number().min(0, 'Cena musi być większa lub równa 0'),
+  price: z.number().min(1, 'Cena musi być większa niż 1'),
   stockQuantity: z.number().int().min(0, 'Ilość musi być liczbą całkowitą większą lub równą 0'),
   reviewRating: z.number().min(0).max(5),
   reviewCount: z.number().int().min(0),
+});
+
+export const ProductCreateDtoSchema = z.object({
+  title: z.string().min(1, 'Nazwa jest wymagana'),
+  category: z.string().min(1, 'Kategoria jest wymagana'),
+  description: z.string().min(1, 'Opis jest wymagany'),
+  imageUrl: z.url('Nieprawidłowy URL').or(z.literal('')).optional(),
+  price: z.number().min(1, 'Cena musi być większa niż 1'),
+  stockQuantity: z.number().int().min(0, 'Ilość musi być liczbą całkowitą większą lub równą 0'),
+  isArchived: z.boolean(),
 });
 
 export const OrderFormDtoSchema = z.object({

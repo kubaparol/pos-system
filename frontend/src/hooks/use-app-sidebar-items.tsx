@@ -43,7 +43,7 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
 
     // Bottom items
     {
-      title: 'Logout',
+      title: 'Wyloguj',
       icon: LogOut,
       onClick: logout,
     },

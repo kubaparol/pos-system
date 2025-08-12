@@ -30,12 +30,7 @@ export const listProductsValidation = [
 
 export const createProductValidation = [
   body('title').isString().trim().isLength({ min: 1 }).blacklist('<>').escape(),
-  body('category')
-    .isString()
-    .trim()
-    .isLength({ min: 1 })
-    .blacklist('<>')
-    .escape(),
+  body('category').isString().trim().isLength({ min: 1 }),
   body('description')
     .isString()
     .trim()

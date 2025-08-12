@@ -40,7 +40,11 @@ export const ProductGrid = ({ archived }: ProductGridProps) => {
   }
 
   if (productsData?.data.data.length === 0) {
-    return <EmptyState />;
+    return (
+      <>
+        <EmptyState />
+      </>
+    );
   }
 
   return (

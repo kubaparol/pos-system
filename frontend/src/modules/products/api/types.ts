@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ProductEditDtoSchema } from '@/api/api.contracts';
+import { ProductCreateDtoSchema, ProductEditDtoSchema } from '@/api/api.contracts';
 import type { ApiResponse } from '@/api/api.types';
 
 export interface ProductsQueryParams {
@@ -30,6 +30,10 @@ export type ProductResponse = ApiResponse<ProductResponseData[]>;
 export type ProductEditDto = z.infer<typeof ProductEditDtoSchema>;
 
 export type ProductEditResponse = ApiResponse<ProductResponseData>;
+
+export type ProductCreateDto = z.infer<typeof ProductCreateDtoSchema>;
+
+export type ProductCreateResponse = ApiResponse<ProductResponseData>;
 
 export interface ArchiveProductResponseData {
   id: string;

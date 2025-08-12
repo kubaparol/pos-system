@@ -2,9 +2,18 @@ import axios, { type AxiosRequestConfig } from 'axios';
 
 import type { SignInDto } from '@/modules/auth/api/types';
 import type { FinalizeOrderDto, OrdersQueryParams } from '@/modules/orders/api/types';
-import type { ProductEditDto, ProductsQueryParams } from '@/modules/products/api/types';
+import type {
+  ProductCreateDto,
+  ProductEditDto,
+  ProductsQueryParams,
+} from '@/modules/products/api/types';
 
-import { FinalizeOrderDtoSchema, ProductEditDtoSchema, SignInDtoSchema } from './api.contracts';
+import {
+  FinalizeOrderDtoSchema,
+  ProductCreateDtoSchema,
+  ProductEditDtoSchema,
+  SignInDtoSchema,
+} from './api.contracts';
 import { api } from './api.instance';
 
 export const signIn = (signInDto: SignInDto, config?: AxiosRequestConfig) => {
@@ -18,6 +27,11 @@ export const me = (config?: AxiosRequestConfig) => {
 
 export const getProducts = (params?: ProductsQueryParams, config?: AxiosRequestConfig) => {
   return api.get('/products', { ...config, params });
+};
+
+export const createProduct = (productCreateDto: ProductCreateDto, config?: AxiosRequestConfig) => {
+  const data = ProductCreateDtoSchema.parse(productCreateDto);
+  return api.post('/products', data, config);
 };
 
 export const editProduct = (
