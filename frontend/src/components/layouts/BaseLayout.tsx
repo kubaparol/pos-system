@@ -1,9 +1,17 @@
 import { Outlet } from 'react-router-dom';
 
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+
+import { AppSidebar } from '../base/AppSidebar';
+
 export const BaseLayout = () => {
   return (
-    <main className="min-h-[calc(100vh-64px)] flex flex-col">
-      <Outlet />
-    </main>
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        <Outlet />
+      </main>
+    </SidebarProvider>
   );
 };
