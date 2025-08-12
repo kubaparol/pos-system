@@ -1,10 +1,10 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 
 import type { SignInDto } from '@/modules/auth/api/types';
-import type { OrderDto } from '@/modules/orders/api/types';
-import type { ProductEditDto } from '@/modules/products/api/types';
+import type { FinalizeOrderDto, OrdersQueryParams } from '@/modules/orders/api/types';
+import type { ProductEditDto, ProductsQueryParams } from '@/modules/products/api/types';
 
-import { OrderDtoSchema, ProductEditDtoSchema, SignInDtoSchema } from './api.contracts';
+import { FinalizeOrderDtoSchema, ProductEditDtoSchema, SignInDtoSchema } from './api.contracts';
 import { api } from './api.instance';
 
 export const signIn = (signInDto: SignInDto, config?: AxiosRequestConfig) => {
@@ -16,10 +16,7 @@ export const me = (config?: AxiosRequestConfig) => {
   return api.get('/users/me', config);
 };
 
-export const getProducts = (
-  params?: { q?: string; category?: string; sort?: string },
-  config?: AxiosRequestConfig,
-) => {
+export const getProducts = (params?: ProductsQueryParams, config?: AxiosRequestConfig) => {
   return api.get('/products', { ...config, params });
 };
 
@@ -44,8 +41,12 @@ export const getCategoriesFromFakeStore = (config?: AxiosRequestConfig) => {
   return axios.get('https://fakestoreapi.com/products/categories', config);
 };
 
-export const finalizeOrder = (orderDto: OrderDto, config?: AxiosRequestConfig) => {
-  const data = OrderDtoSchema.parse(orderDto);
+export const getOrders = (params?: OrdersQueryParams, config?: AxiosRequestConfig) => {
+  return api.get('/orders', { ...config, params });
+};
+
+export const finalizeOrder = (FinalizeOrderDto: FinalizeOrderDto, config?: AxiosRequestConfig) => {
+  const data = FinalizeOrderDtoSchema.parse(FinalizeOrderDto);
   return api.post('/orders/finalize', data, config);
 };
 

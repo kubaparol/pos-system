@@ -31,6 +31,11 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
       url: pathKeys.products,
     },
     {
+      title: 'Zamówienia',
+      icon: Package,
+      url: pathKeys.orders,
+    },
+    {
       title: 'Archiwum',
       icon: Archive,
       url: pathKeys.archivedProducts,

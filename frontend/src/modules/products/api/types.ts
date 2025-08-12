@@ -3,6 +3,13 @@ import { z } from 'zod';
 import { ProductEditDtoSchema } from '@/api/api.contracts';
 import type { ApiResponse } from '@/api/api.types';
 
+export interface ProductsQueryParams {
+  q?: string;
+  category?: string;
+  archived?: boolean;
+  sort?: string;
+}
+
 export interface ProductResponseData {
   id: string;
   category: string;

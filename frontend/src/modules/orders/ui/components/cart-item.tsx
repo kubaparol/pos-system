@@ -41,6 +41,7 @@ export const CartItem = ({ item }: CartItemProps) => {
         <div className="flex items-center gap-2 mt-2">
           <div className="flex items-center gap-1">
             <Button
+              title="Zmniejsz ilość"
               variant="outline"
               size="sm"
               onClick={() => handleQuantityChange(item.quantity - 1)}
@@ -57,6 +58,7 @@ export const CartItem = ({ item }: CartItemProps) => {
               className="h-8 w-16 text-center"
             />
             <Button
+              title="Zwiększ ilość"
               variant="outline"
               size="sm"
               onClick={() => handleQuantityChange(item.quantity + 1)}
@@ -68,6 +70,7 @@ export const CartItem = ({ item }: CartItemProps) => {
           </div>
 
           <Button
+            title="Usuń produkt"
             variant="ghost"
             size="sm"
             onClick={() => removeItem(item.id)}

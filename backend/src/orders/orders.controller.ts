@@ -165,7 +165,7 @@ export const finalizeOrder = async (
         },
       });
 
-      return { ...createdOrder, orderNumber: createdOrder.id };
+      return { ...createdOrder, orderNumber: createdOrder.orderNumber };
     });
 
     res.status(201).json({
@@ -185,27 +185,59 @@ export const listOrders = async (
 ) => {
   try {
     const qParam = req.query.q;
-    const q = typeof qParam === 'string' ? qParam.trim() : undefined;
+    const dateFromParam = req.query.dateFrom;
+    const dateToParam = req.query.dateTo;
+    const amountMinParam = req.query.amountMin;
+    const amountMaxParam = req.query.amountMax;
 
-    let where = {};
+    const q = typeof qParam === 'string' ? qParam.trim() : undefined;
+    const dateFrom =
+      typeof dateFromParam === 'string' ? dateFromParam : undefined;
+    const dateTo = typeof dateToParam === 'string' ? dateToParam : undefined;
+    const amountMin =
+      typeof amountMinParam === 'string'
+        ? parseFloat(amountMinParam)
+        : undefined;
+    const amountMax =
+      typeof amountMaxParam === 'string'
+        ? parseFloat(amountMaxParam)
+        : undefined;
+
+    const where: Prisma.OrderWhereInput = {};
 
     if (q && q.length > 0) {
       const digitsOnly = q.replace(/\D/g, '');
       if (digitsOnly.length >= 3) {
-        // Treat as phone fragment
-        where = {
-          customer: {
-            phone: { contains: digitsOnly },
-          },
+        where.customer = {
+          phone: { contains: digitsOnly },
         };
       } else {
-        // Name fragment, case-insensitive
-        where = {
-          OR: [
-            { customer: { firstName: { contains: q, mode: 'insensitive' } } },
-            { customer: { lastName: { contains: q, mode: 'insensitive' } } },
-          ],
-        };
+        where.OR = [
+          { customer: { firstName: { contains: q, mode: 'insensitive' } } },
+          { customer: { lastName: { contains: q, mode: 'insensitive' } } },
+        ];
+      }
+    }
+
+    if (dateFrom || dateTo) {
+      where.createdAt = {};
+      if (dateFrom) {
+        where.createdAt.gte = new Date(dateFrom);
+      }
+      if (dateTo) {
+        const endDate = new Date(dateTo);
+        endDate.setDate(endDate.getDate() + 1);
+        where.createdAt.lt = endDate;
+      }
+    }
+
+    if (amountMin !== undefined || amountMax !== undefined) {
+      where.totalAmount = {};
+      if (amountMin !== undefined && !isNaN(amountMin)) {
+        where.totalAmount.gte = amountMin;
+      }
+      if (amountMax !== undefined && !isNaN(amountMax)) {
+        where.totalAmount.lte = amountMax;
       }
     }
 

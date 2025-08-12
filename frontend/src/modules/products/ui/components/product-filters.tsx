@@ -1,7 +1,9 @@
-import { useCallback } from 'react';
+import { X } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { SearchInput } from '@/components/base/search-input';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -11,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import { formUrlQuery } from '@/utils';
+import { formUrlQuery, removeKeysFromQuery } from '@/utils';
 
 import { useCategoriesQuery } from '../../api/categories.query';
 
@@ -35,8 +37,15 @@ export const ProductFilters = () => {
   const [searchParams] = useSearchParams();
   const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
 
+  const searchParam = searchParams.get(SEARCH_QUERY_NAME);
   const categoryQuery = searchParams.get(CATEGORY_QUERY_NAME) || '';
   const sortQuery = searchParams.get(SORT_QUERY_NAME) || '';
+
+  const [searchValue, setSearchValue] = useState(searchParam || '');
+
+  useEffect(() => {
+    setSearchValue(searchParam || '');
+  }, [searchParam]);
 
   const handleCategoryChange = useCallback(
     (value: string) => {
@@ -64,10 +73,26 @@ export const ProductFilters = () => {
     [navigate, searchParams],
   );
 
+  const clearFilters = useCallback(() => {
+    const newUrl = removeKeysFromQuery({
+      params: searchParams.toString(),
+      keysToRemove: [SEARCH_QUERY_NAME, CATEGORY_QUERY_NAME, SORT_QUERY_NAME],
+    });
+    setSearchValue('');
+    navigate(newUrl);
+  }, [navigate, searchParams]);
+
+  const hasActiveFilters = searchValue || (categoryQuery && categoryQuery !== 'all') || sortQuery;
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-4">
-        <SearchInput query={SEARCH_QUERY_NAME} />
+        <SearchInput
+          query={SEARCH_QUERY_NAME}
+          placeholder="Szukaj produktów..."
+          value={searchValue}
+          setValue={setSearchValue}
+        />
 
         {categoriesLoading ? (
           <Skeleton className="h-10 w-full sm:w-48" />
@@ -99,6 +124,17 @@ export const ProductFilters = () => {
             ))}
           </SelectContent>
         </Select>
+
+        {hasActiveFilters && (
+          <Button
+            variant="outline"
+            onClick={clearFilters}
+            size="icon"
+            className="shrink-0 bg-transparent"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ export const CartPanel = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+        <div className="space-y-3 pr-2 max-h-96 overflow-y-auto">
           {items.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}

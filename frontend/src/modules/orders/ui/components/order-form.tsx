@@ -24,7 +24,7 @@ import { useSearchCustomerByPhoneQuery } from '@/modules/customers/api/search-by
 import { handleError } from '@/utils';
 
 import { useFinalizeOrderMutation } from '../../api/finalize.mutation';
-import type { OrderDto, OrderFormDto } from '../../api/types';
+import type { FinalizeOrderDto, OrderFormDto } from '../../api/types';
 import { useCartStore } from '../../store/use-cart-store';
 
 interface OrderFormProps {
@@ -79,7 +79,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
 
   const onSubmit = async (data: OrderFormDto) => {
     try {
-      const orderData: OrderDto = {
+      const orderData: FinalizeOrderDto = {
         customer: {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -126,7 +126,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
         <CardContent className="text-center space-y-4">
           <div>
             <p className="text-gray-600 mb-2">Numer zamówienia:</p>
-            <p className="text-xl font-bold text-gray-900">#123123</p>
+            <p className="text-xl font-bold text-gray-900">#{orderNumber}</p>
           </div>
 
           <p className="text-gray-600">

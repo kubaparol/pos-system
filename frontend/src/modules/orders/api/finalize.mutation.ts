@@ -5,14 +5,15 @@ import { queryClient } from '@/lib/query-client';
 
 import { finalizeOrder } from '@/api/api.service';
 
-import type { OrderDto } from './types';
-import type { OrderResponse } from './types';
+import { ORDERS_QUERY_KEY } from './orders.query';
+import type { FinalizeOrderDto } from './types';
+import type { FinalizeOrderResponse } from './types';
 
 export const useFinalizeOrderMutation = () => {
-  return useMutation<AxiosResponse<OrderResponse>, Error, OrderDto>({
+  return useMutation<AxiosResponse<FinalizeOrderResponse>, Error, FinalizeOrderDto>({
     mutationFn: (orderDto) => finalizeOrder(orderDto),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [] });
+      queryClient.invalidateQueries({ queryKey: [ORDERS_QUERY_KEY] });
     },
   });
 };

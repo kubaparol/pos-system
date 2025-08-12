@@ -28,7 +28,7 @@ export const OrderFormDtoSchema = z.object({
   note: z.string().optional(),
 });
 
-export const OrderDtoSchema = z.object({
+export const FinalizeOrderDtoSchema = z.object({
   customer: z.object({
     firstName: z.string().min(1, 'Imię jest wymagane'),
     lastName: z.string().min(1, 'Nazwisko jest wymagane'),

@@ -3,16 +3,9 @@ import type { AxiosResponse } from 'axios';
 
 import { getProducts } from '@/api/api.service';
 
-import type { ProductResponse } from './types';
+import type { ProductResponse, ProductsQueryParams } from './types';
 
 export const PRODUCTS_QUERY_KEY = 'products';
-
-interface ProductsQueryParams {
-  q?: string;
-  category?: string;
-  archived?: boolean;
-  sort?: string;
-}
 
 export const useProductsQuery = (params?: ProductsQueryParams) => {
   return useQuery<AxiosResponse<ProductResponse>, Error>({
