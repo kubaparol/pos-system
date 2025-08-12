@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 
 import type { SignInDto } from '@/modules/auth/api/types';
 import type { ProductEditDto } from '@/modules/products/api/types';
@@ -15,8 +15,11 @@ export const me = (config?: AxiosRequestConfig) => {
   return api.get('/users/me', config);
 };
 
-export const getProducts = (config?: AxiosRequestConfig) => {
-  return api.get('/products', config);
+export const getProducts = (
+  params?: { q?: string; category?: string },
+  config?: AxiosRequestConfig,
+) => {
+  return api.get('/products', { ...config, params });
 };
 
 export const editProduct = (
@@ -34,4 +37,8 @@ export const archiveProduct = (productId: string, config?: AxiosRequestConfig) =
 
 export const restoreProduct = (productId: string, config?: AxiosRequestConfig) => {
   return api.post(`/products/${productId}/restore`, config);
+};
+
+export const getCategoriesFromFakeStore = (config?: AxiosRequestConfig) => {
+  return axios.get('https://fakestoreapi.com/products/categories', config);
 };

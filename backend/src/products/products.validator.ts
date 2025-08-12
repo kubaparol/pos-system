@@ -49,13 +49,7 @@ export const updateProductValidation = [
     .isLength({ min: 1 })
     .blacklist('<>')
     .escape(),
-  body('category')
-    .optional()
-    .isString()
-    .trim()
-    .isLength({ min: 1 })
-    .blacklist('<>')
-    .escape(),
+  body('category').optional().isString().trim().isLength({ min: 1 }),
   body('description')
     .optional()
     .isString()

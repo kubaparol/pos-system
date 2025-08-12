@@ -17,8 +17,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
 
+import { useCategoriesQuery } from '../../api/categories.query';
 import type { ProductEditDto, ProductResponseData } from '../../api/types';
 
 interface ProductEditDialogProps {
@@ -35,6 +44,7 @@ export const ProductEditDialog = ({
   onFormSubmit,
 }: ProductEditDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
 
   const form = useForm<ProductEditDto>({
     resolver: zodResolver(ProductEditDtoSchema),
@@ -86,7 +96,22 @@ export const ProductEditDialog = ({
                 <FormItem>
                   <FormLabel>Kategoria</FormLabel>
                   <FormControl>
-                    <Input placeholder="Kategoria" {...field} />
+                    {categoriesLoading ? (
+                      <Skeleton className="h-10 w-full" />
+                    ) : (
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Wybierz kategorię" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categoriesData?.data.map((category) => (
+                            <SelectItem key={category} value={category}>
+                              {category}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
