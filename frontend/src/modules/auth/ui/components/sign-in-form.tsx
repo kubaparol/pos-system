@@ -3,9 +3,8 @@ import { Loader2, Lock, Mail } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
 import { SignInDtoSchema } from '@/api/api.contracts';
-import type { SignInDto } from '@/api/api.types';
 
-import { PasswordInput } from '@/components/base/PasswordInput';
+import { PasswordInput } from '@/components/base/password-input';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,6 +15,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+
+import type { SignInDto } from '../../api/types';
 
 interface SignInFormProps {
   onFormSubmit: (values: SignInDto) => void;

@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { useAuthContext } from '@/components/providers/auth/AuthProvider.context';
+import { useAuthContext } from '@/components/providers/auth/auth-provider.context';
 
 import { pathKeys } from './path-keys';
 

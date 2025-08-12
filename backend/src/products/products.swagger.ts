@@ -33,6 +33,13 @@
  *           enum: [0, gt0]
  *         description: Filter by stock quantity (0 = out of stock, gt0 = in stock)
  *         example: "gt0"
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           enum: [name-asc, name-desc, price-asc, price-desc, stock-asc, stock-desc, category-asc, category-desc]
+ *         description: Sort products by specified field and order
+ *         example: "name-asc"
  *     responses:
  *       200:
  *         description: List of products retrieved successfully

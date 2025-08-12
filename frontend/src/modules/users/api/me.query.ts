@@ -4,7 +4,8 @@ import type { AxiosResponse } from 'axios';
 import { accessTokenCookie } from '@/lib/cookies';
 
 import { me } from '@/api/api.service';
-import type { UserResponse } from '@/api/api.types';
+
+import type { UserResponse } from './types';
 
 export const ME_QUERY_KEY = 'logged-user-data';
 

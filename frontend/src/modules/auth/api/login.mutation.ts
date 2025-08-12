@@ -6,10 +6,11 @@ import { accessTokenCookie } from '@/lib/cookies';
 import { queryClient } from '@/lib/query-client';
 
 import { signIn } from '@/api/api.service';
-import type { SignInDto, SignInResponse } from '@/api/api.types';
 
 import { getMeQuery } from '@/modules/users/api/me.query';
 import { pathKeys } from '@/router/path-keys';
+
+import type { SignInDto, SignInResponse } from './types';
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();

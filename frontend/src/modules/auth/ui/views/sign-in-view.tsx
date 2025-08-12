@@ -1,13 +1,12 @@
 import { Store } from 'lucide-react';
 import { toast } from 'sonner';
 
-import type { SignInDto } from '@/api/api.types';
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { handleError } from '@/utils';
 
 import { useLoginMutation } from '../../api/login.mutation';
+import type { SignInDto } from '../../api/types';
 import { SignInForm } from '../components/sign-in-form';
 
 export const SignInView = () => {
