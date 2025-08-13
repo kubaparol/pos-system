@@ -87,7 +87,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
         },
         items: items.map((item) => ({
           productId: item.id,
-          quantity: item.quantity + 5,
+          quantity: item.quantity,
         })),
         note: data.note || undefined,
       };

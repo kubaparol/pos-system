@@ -1,4 +1,4 @@
-import { Archive, Home, LogOut, type LucideIcon, Package } from 'lucide-react';
+import { Archive, DollarSign, Home, LogOut, type LucideIcon, Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -37,7 +37,7 @@ export const useAppSidebarItems = (): AppSidebarItem[] => {
     },
     {
       title: 'Zamówienia',
-      icon: Package,
+      icon: DollarSign,
       url: pathKeys.orders,
     },
     {
