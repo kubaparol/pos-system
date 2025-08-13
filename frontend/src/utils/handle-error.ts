@@ -11,7 +11,11 @@ export const handleError = (error: unknown) => {
         .map((err: { path: string; msg: string }) => `${err.path}: ${err.msg}`)
         .join(', ');
       toast.error(`Błędy walidacji: ${errorMessages}`);
+    } else if (typeof errorData === 'string') {
+      // Handle normalized error response from interceptor
+      toast.error(errorData);
     } else if (errorData?.error) {
+      // Handle original error response format
       toast.error(errorData.error);
     } else {
       toast.error(error.response?.statusText || 'Wystąpił błąd');

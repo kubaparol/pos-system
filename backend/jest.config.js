@@ -5,7 +5,12 @@ export default {
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   modulePathIgnorePatterns: ['/dist/'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.dev.json',
+      },
+    ],
   },
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',

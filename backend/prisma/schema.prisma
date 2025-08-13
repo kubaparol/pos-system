@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
@@ -15,10 +9,9 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String
-
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -26,20 +19,19 @@ model User {
 }
 
 model Product {
-  id            String  @id @default(uuid())
+  id            String      @id @default(uuid())
   category      String
   title         String
   description   String
   imageUrl      String?
   price         Decimal
-  stockQuantity Int     @default(0)
-  isArchived    Boolean @default(false)
-  reviewRating  Decimal @default(0)
-  reviewCount   Int     @default(0)
-
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  OrderItem OrderItem[]
+  stockQuantity Int         @default(0)
+  isArchived    Boolean     @default(false)
+  reviewRating  Decimal     @default(0)
+  reviewCount   Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  OrderItem     OrderItem[]
 
   @@index([isArchived])
   @@index([category])
@@ -48,32 +40,28 @@ model Product {
 }
 
 model Customer {
-  id        String @id @default(uuid())
-  phone     String @unique
+  id        String   @id @default(uuid())
+  phone     String   @unique
   firstName String
   lastName  String
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  orders Order[]
+  orders    Order[]
 
   @@index([phone])
   @@map("customers")
 }
 
 model Order {
-  id          String  @id @default(uuid())
-  orderNumber BigInt  @unique @default(autoincrement())
+  id          String      @id @default(uuid())
+  orderNumber BigInt      @unique @default(autoincrement())
   customerId  String
   totalAmount Decimal
   note        String?
-
-  createdAt DateTime @default(dbgenerated("now()")) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime @default(dbgenerated("now()")) @updatedAt @map("updated_at") @db.Timestamptz(6)
-
-  customer Customer    @relation(fields: [customerId], references: [id], onDelete: NoAction)
-  items    OrderItem[]
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime    @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  items       OrderItem[]
+  customer    Customer    @relation(fields: [customerId], references: [id], onDelete: NoAction)
 
   @@index([createdAt(sort: Desc)])
   @@index([customerId, createdAt(sort: Desc)])
@@ -81,17 +69,15 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   orderId   String
   productId String
   quantity  Int
   unitPrice Decimal
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: NoAction)
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: NoAction)
 
   @@index([orderId])
   @@index([productId])
