@@ -10,7 +10,7 @@ import { useAuthContext } from '../providers/auth/auth-provider.context';
 import { Separator } from '../ui/separator';
 
 const TITLES: Record<string, string> = {
-  [pathKeys.home]: 'Dashboard',
+  [pathKeys.dashboard]: 'Strona główna',
   [pathKeys.products]: 'Produkty',
   [pathKeys.archivedProducts]: 'Archiwum',
   [pathKeys.orders]: 'Zamówienia',

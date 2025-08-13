@@ -6,6 +6,7 @@ import helmet from 'helmet';
 
 import authRouter from './auth/auth.route.js';
 import customersRouter from './customers/customers.route.js';
+import dashboardRouter from './dashboard/dashboard.route.js';
 import ordersRouter from './orders/orders.route.js';
 import productsRouter from './products/products.route.js';
 import { env } from './shared/config/env.js';
@@ -45,6 +46,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/customers', authorize, customersRouter);
 app.use('/api/orders', authorize, ordersRouter);
 app.use('/api/products', authorize, productsRouter);
+app.use('/api/dashboard', authorize, dashboardRouter);
 app.use('/api/users', authorize, usersRouter);
 
 app.use(errorMiddleware);

@@ -1,8 +1,7 @@
-import { Archive, ArchiveRestore, Edit, MoreVertical, Plus, ShoppingCart } from 'lucide-react';
+import { Archive, Edit, Minus, Plus, RotateCcw, ShoppingCart, Star } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { StockIndicator } from '@/components/base/stock-indicator';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,15 +15,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
 import { useCartStore } from '@/modules/orders/store/use-cart-store';
-import { formatCurrency, handleError } from '@/utils';
+import { cn, formatCurrency, handleError } from '@/utils';
 
 import { useArchiveProductMutation } from '../../api/archive.mutation';
 import { useEditProductMutation } from '../../api/edit.mutation';
@@ -41,24 +34,73 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const [showArchiveDialog, setShowArchiveDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const { mutateAsync: editProduct } = useEditProductMutation();
   const { mutateAsync: archiveProduct } = useArchiveProductMutation();
   const { mutateAsync: restoreProduct } = useRestoreProductMutation();
 
-  const isOutOfStock = product.stockQuantity === 0;
-  const canAddToCart = !isOutOfStock && !product.isArchived;
+  const rating = Number.parseFloat(product.reviewRating || '0');
+  const formattedPrice = formatCurrency(Number(product.price));
 
-  const handleAddToCart = () => {
+  const getStockStatus = () => {
+    if (product.isArchived)
+      return { text: 'Tymczasowo niedostępny', color: 'bg-gray-500', urgent: false };
+    if (product.stockQuantity === 0)
+      return { text: 'Brak w magazynie', color: 'bg-red-500', urgent: true };
+    if (product.stockQuantity === 1)
+      return { text: 'Ostatnia sztuka!', color: 'bg-red-500', urgent: true };
+    if (product.stockQuantity <= 3)
+      return {
+        text: `Kończy się (${product.stockQuantity} szt.)`,
+        color: 'bg-amber-500',
+        urgent: true,
+      };
+    if (product.stockQuantity <= 10)
+      return {
+        text: `Dostępny (${product.stockQuantity} szt.)`,
+        color: 'bg-green-500',
+        urgent: false,
+      };
+    return {
+      text: `Dostępny (${product.stockQuantity}+ szt.)`,
+      color: 'bg-green-500',
+      urgent: false,
+    };
+  };
+
+  const stockStatus = getStockStatus();
+  const isPopular = rating >= 4.5 && (product.reviewCount || 0) >= 10;
+  const canAddToCart = !product.isArchived && product.stockQuantity > 0;
+
+  const handleAddToCart = async () => {
     if (!canAddToCart) return;
+    setIsLoading(true);
+    try {
+      const wasAdded = addItem(
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          stockQuantity: product.stockQuantity,
+          imageUrl: product.imageUrl,
+        },
+        quantity,
+      );
 
-    addItem({
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      stockQuantity: product.stockQuantity,
-      imageUrl: product.imageUrl,
-    });
+      if (wasAdded) {
+        toast.success(`Dodano ${quantity} szt. do zamówienia`);
+      }
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const adjustQuantity = (delta: number) => {
+    const newQuantity = Math.max(1, Math.min(product.stockQuantity, quantity + delta));
+    setQuantity(newQuantity);
   };
 
   const handleArchiveToggle = async () => {
@@ -93,110 +135,143 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <>
-      <Card className="group h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-200 py-0">
-        <div className="relative">
-          <div className="aspect-square relative bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+      <Card
+        className={cn(
+          'w-full mx-auto transition-all duration-200 hover:shadow-lg py-0',
+          product.isArchived && 'opacity-75 bg-muted/50',
+        )}
+      >
+        <CardContent className="p-4 flex flex-col h-full">
+          <div className="flex items-center justify-between mb-3">
+            <Badge variant="secondary" className="text-xs font-medium">
+              {product.category}
+            </Badge>
+            {isPopular && (
+              <Badge className="bg-amber-100 text-amber-800 text-xs">⭐ Popularne</Badge>
+            )}
+          </div>
+
+          <div className="relative mb-4">
             {product.imageUrl ? (
               <img
                 src={product.imageUrl}
                 alt={product.title}
-                className="object-cover group-hover:scale-105 transition-transform duration-200"
+                className="w-full h-48 object-contain rounded-lg bg-muted"
+                loading="lazy"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
+              <div className="w-full h-48 flex items-center justify-center text-gray-400 bg-muted rounded-lg">
                 <ShoppingCart className="w-16 h-16" />
               </div>
             )}
-          </div>
-
-          <div className="absolute top-2 left-2 flex flex-col gap-1">
-            {isOutOfStock && (
-              <Badge variant="destructive" className="text-xs font-medium">
-                Brak
-              </Badge>
-            )}
-            {product.isArchived && (
-              <Badge variant="secondary" className="text-xs font-medium">
-                Archiwum
-              </Badge>
-            )}
-          </div>
-
-          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="h-8 w-8 p-0 bg-white/90 hover:bg-white"
-                >
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
-                  <Edit className="mr-2 h-4 w-4" />
-                  Edytuj
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setShowArchiveDialog(true)}>
-                  {product.isArchived ? (
-                    <>
-                      <ArchiveRestore className="mr-2 h-4 w-4" />
-                      Przywróć
-                    </>
-                  ) : (
-                    <>
-                      <Archive className="mr-2 h-4 w-4" />
-                      Archiwizuj
-                    </>
-                  )}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-
-        <CardContent className="p-4 flex-1 flex flex-col">
-          <div className="flex-1 space-y-3">
-            <h3 className="font-semibold text-sm leading-tight line-clamp-2 min-h-[2.5rem]">
-              {product.title}
-            </h3>
-
-            <div className="text-xs text-gray-500 uppercase tracking-wide">{product.category}</div>
-
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <p className="text-xl font-bold text-green-600">
-                  {formatCurrency(Number(product.price))}
-                </p>
+            {stockStatus.urgent && (
+              <div className="absolute top-2 right-2">
+                <Badge className={cn('text-white text-xs font-bold', stockStatus.color)}>
+                  {stockStatus.urgent && product.stockQuantity <= 1 ? 'OSTATNIA!' : 'KOŃCZY SIĘ'}
+                </Badge>
               </div>
+            )}
+          </div>
+
+          <h3 className="font-semibold text-lg leading-tight mb-2 line-clamp-2">{product.title}</h3>
+
+          {(product.reviewCount || 0) > 0 && (
+            <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center">
+                <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                <span className="font-medium text-sm ml-1">{rating.toFixed(1)}</span>
+              </div>
+              <span className="text-muted-foreground text-sm">({product.reviewCount} opinii)</span>
+            </div>
+          )}
+
+          <div className="mb-4">
+            <div className="text-2xl font-bold text-primary">{formattedPrice}</div>
+          </div>
+
+          <div className="mt-auto">
+            <div className="mb-4">
+              <Badge className={cn('text-white font-medium')}>{stockStatus.text}</Badge>
             </div>
 
-            <StockIndicator stockQuantity={product.stockQuantity} />
-          </div>
-
-          <div className="mt-4">
-            {canAddToCart ? (
+            <div className="mb-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span
+                  className={cn('text-sm font-medium', !canAddToCart && 'text-muted-foreground')}
+                >
+                  Ilość:
+                </span>
+                <div className="flex items-center border rounded-lg">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 w-8 p-0"
+                    onClick={() => adjustQuantity(-1)}
+                    disabled={quantity <= 1 || !canAddToCart}
+                  >
+                    <Minus className="w-3 h-3" />
+                  </Button>
+                  <span
+                    className={cn(
+                      'px-3 py-1 text-sm font-medium min-w-[2rem] text-center',
+                      !canAddToCart && 'text-muted-foreground',
+                    )}
+                  >
+                    {canAddToCart ? quantity : 0}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 w-8 p-0"
+                    onClick={() => adjustQuantity(1)}
+                    disabled={quantity >= product.stockQuantity || !canAddToCart}
+                  >
+                    <Plus className="w-3 h-3" />
+                  </Button>
+                </div>
+              </div>
               <Button
                 onClick={handleAddToCart}
-                className="w-full h-10 text-sm font-medium"
-                size="sm"
+                disabled={isLoading || !canAddToCart}
+                className="w-full"
+                size="lg"
               >
-                <Plus className="mr-2 h-4 w-4" />
-                <span className="hidden sm:inline">Dodaj do koszyka</span>
-                <span className="sm:hidden">Dodaj</span>
+                <ShoppingCart className="w-5 h-5 mr-2" />
+                {isLoading ? 'Dodawanie...' : 'Dodaj do koszyka'}
               </Button>
-            ) : (
-              <Button
-                disabled
-                className="w-full h-10 text-sm font-medium"
-                size="sm"
-                variant="secondary"
-              >
-                {isOutOfStock ? 'Brak w magazynie' : 'Niedostępny'}
-              </Button>
-            )}
+            </div>
+
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setShowEditDialog(true)}
+              className="w-full"
+            >
+              <Edit className="w-4 h-4 mr-2" />
+              Edytuj
+            </Button>
+
+            <div className="mt-2">
+              {product.isArchived ? (
+                <Button
+                  variant="outline"
+                  onClick={() => setShowArchiveDialog(true)}
+                  className="w-full text-green-600 border-green-200 hover:bg-green-50"
+                >
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Przywróć
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  onClick={() => setShowArchiveDialog(true)}
+                  className="w-full hover:text-destructive hover:border-destructive"
+                >
+                  <Archive className="w-4 h-4 mr-2" />
+                  Archiwizuj
+                </Button>
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>

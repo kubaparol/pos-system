@@ -13,7 +13,7 @@ export type CartItem = {
 
 interface CartState {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => boolean;
   updateQuantity: (productId: string, quantity: number) => void;
   removeItem: (productId: string) => void;
   clearCart: () => void;
@@ -31,19 +31,23 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addItem: (newItem) => {
+      addItem: (newItem, quantity = 1) => {
+        let wasAdded = false;
+
         set((state) => {
           const existingItem = state.items.find((item) => item.id === newItem.id);
 
           if (existingItem) {
-            const newQuantity = Math.min(existingItem.quantity + 1, newItem.stockQuantity);
+            const newQuantity = Math.min(existingItem.quantity + quantity, newItem.stockQuantity);
             if (newQuantity === existingItem.quantity) {
               toast.warning('Maksymalna ilość', {
                 description: 'Nie można dodać więcej tego produktu',
               });
+              wasAdded = false;
               return state;
             }
 
+            wasAdded = true;
             return {
               items: state.items.map((item) =>
                 item.id === newItem.id ? { ...item, quantity: newQuantity } : item,
@@ -51,10 +55,14 @@ export const useCartStore = create<CartState>()(
             };
           }
 
+          const finalQuantity = Math.min(quantity, newItem.stockQuantity);
+          wasAdded = finalQuantity > 0;
           return {
-            items: [...state.items, { ...newItem, quantity: 1 }],
+            items: [...state.items, { ...newItem, quantity: finalQuantity }],
           };
         });
+
+        return wasAdded;
       },
 
       updateQuantity: (productId, quantity) => {

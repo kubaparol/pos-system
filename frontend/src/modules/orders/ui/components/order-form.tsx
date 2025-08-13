@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowLeft, ArrowRight, CheckCircle, Loader2, User } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Info, Loader2, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { useSearchCustomerByPhoneQuery } from '@/modules/customers/api/search-by-phone.query';
 import { handleError } from '@/utils';
@@ -87,7 +88,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
         },
         items: items.map((item) => ({
           productId: item.id,
-          quantity: item.quantity + 5,
+          quantity: item.quantity,
         })),
         note: data.note || undefined,
       };
@@ -178,7 +179,21 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefon</FormLabel>
+                  <FormLabel className="flex items-center gap-1">
+                    Telefon
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="size-4 text-gray-400 cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="max-w-xs">
+                          Po wpisaniu numeru telefonu nastąpi automatyczne wyszukanie klienta. Jeśli
+                          robiono już zamówienie dla tego numeru, dane zostaną automatycznie
+                          uzupełnione.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
