@@ -1,4 +1,4 @@
-import { CirclePlus, ShoppingCart } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -52,7 +52,7 @@ export const AppSidebar = () => {
         <SidebarContent>
           <div className="flex h-16 items-center px-6">
             <Link to={pathKeys.dashboard} className="flex items-center gap-2 font-semibold">
-              <ShoppingCart className="size-5" />
+              <img src="/logo.svg" alt="logo" className="size-5" />
               <span>POS System</span>
             </Link>
           </div>

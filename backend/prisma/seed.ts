@@ -70,12 +70,24 @@ async function main() {
       price: p.price,
       reviewCount: p.rating.count,
       reviewRating: p.rating.rate,
-      stockQuantity: 10,
+      stockQuantity: Math.floor(Math.random() * 36),
       title: p.title,
     }));
 
     if (data.length > 0) {
-      await prisma.product.createMany({ data });
+      // Create products one by one with slight delays to ensure different createdAt timestamps
+      for (let i = 0; i < data.length; i++) {
+        await prisma.product.create({ data: data[i] });
+
+        // Add a small delay (100ms) between each product creation
+        // This ensures each product has a different createdAt timestamp
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        // Log progress every 5 products
+        if ((i + 1) % 5 === 0 || i === data.length - 1) {
+          console.log(`📦 Created ${i + 1}/${data.length} products`);
+        }
+      }
 
       console.log(`📦 Imported ${data.length} products`);
     }

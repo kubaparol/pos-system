@@ -1,4 +1,4 @@
-import qs from "query-string";
+import qs from 'query-string';
 
 export type UrlQueryParams = {
   params: string;
@@ -18,6 +18,6 @@ export const formUrlQuery = (props: UrlQueryParams) => {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    { skipNull: true },
   );
 };

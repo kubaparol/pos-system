@@ -1,8 +1,8 @@
-# Dokument wymagań produktu (PRD) - MyStoreAssistant
+# Dokument wymagań produktu (PRD) - POS System
 
 ## 1. Przegląd produktu
 
-MyStoreAssistant to aplikacja webowa w wersji MVP (Minimum Viable Product) stworzona z myślą o właścicielach małych, stacjonarnych sklepów, którzy prowadzą również sprzedaż online. Jej głównym celem jest rozwiązanie problemu braku synchronizacji danych między kanałami sprzedaży. Aplikacja ma działać jako centralny punkt zarządzania sprzedażą stacjonarną, zapewniając użytkownikowi natychmiastowy dostęp do aktualnych stanów magazynowych i cen. Umożliwia szybkie tworzenie zamówień przy ladzie, zarządzanie produktami oraz prowadzenie prostej bazy klientów, stając się jedynym i ostatecznym źródłem prawdy dla operacji w sklepie stacjonarnym. Produkt został zaprojektowany z myślą o responsywności, by zapewnić komfortowe użytkowanie na komputerach stacjonarnych, laptopach i telefonach komórkowych.
+POS System to aplikacja webowa w wersji MVP (Minimum Viable Product) stworzona z myślą o właścicielach małych, stacjonarnych sklepów, którzy prowadzą również sprzedaż online. Jej głównym celem jest rozwiązanie problemu braku synchronizacji danych między kanałami sprzedaży. Aplikacja ma działać jako centralny punkt zarządzania sprzedażą stacjonarną, zapewniając użytkownikowi natychmiastowy dostęp do aktualnych stanów magazynowych i cen. Umożliwia szybkie tworzenie zamówień przy ladzie, zarządzanie produktami oraz prowadzenie prostej bazy klientów, stając się jedynym i ostatecznym źródłem prawdy dla operacji w sklepie stacjonarnym. Produkt został zaprojektowany z myślą o responsywności, by zapewnić komfortowe użytkowanie na komputerach stacjonarnych, laptopach i telefonach komórkowych.
 
 ## 2. Problem użytkownika
 
@@ -15,7 +15,7 @@ Główne problemy Anny to:
 - Brak dedykowanego, szybkiego narzędzia do rejestrowania sprzedaży stacjonarnej, co prowadzi do ręcznego notowania i późniejszego wprowadzania danych, generując ryzyko pomyłek.
 - Rozproszone i niespójne dane o produktach, co komplikuje zarządzanie ofertą.
 
-MyStoreAssistant ma na celu wyeliminowanie tych problemów poprzez dostarczenie jednego, prostego w obsłudze narzędzia, które stanie się centrum zarządzania sprzedażą stacjonarną.
+POS System ma na celu wyeliminowanie tych problemów poprzez dostarczenie jednego, prostego w obsłudze narzędzia, które stanie się centrum zarządzania sprzedażą stacjonarną.
 
 ## 3. Wymagania funkcjonalne
 

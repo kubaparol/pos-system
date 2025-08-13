@@ -1,5 +1,5 @@
 {
-  "name": "my-store-assistant-api",
+  "name": "pos-system-api",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,7 @@
     "dev": "tsx --watch src/app.ts",
     "start": "node dist/src/app.js",
     "build": "tsc",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

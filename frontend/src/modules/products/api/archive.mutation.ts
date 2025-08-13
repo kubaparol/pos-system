@@ -5,6 +5,8 @@ import { queryClient } from '@/lib/query-client';
 
 import { archiveProduct } from '@/api/api.service';
 
+import { DASHBOARD_STATS_QUERY_KEY } from '@/modules/dashboard/api/stats.query';
+
 import { PRODUCTS_QUERY_KEY } from './products.query';
 import type { ArchiveProductResponse } from './types';
 
@@ -13,6 +15,7 @@ export const useArchiveProductMutation = () => {
     mutationFn: (productId) => archiveProduct(productId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [PRODUCTS_QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: [DASHBOARD_STATS_QUERY_KEY] });
     },
   });
 };

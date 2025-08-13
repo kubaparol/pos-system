@@ -44,26 +44,28 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const formattedPrice = formatCurrency(Number(product.price));
 
   const getStockStatus = () => {
-    if (product.isArchived)
+    if (product.isArchived) {
       return { text: 'Tymczasowo niedostępny', color: 'bg-gray-500', urgent: false };
-    if (product.stockQuantity === 0)
+    }
+
+    if (product.stockQuantity === 0) {
       return { text: 'Brak w magazynie', color: 'bg-red-500', urgent: true };
-    if (product.stockQuantity === 1)
+    }
+
+    if (product.stockQuantity === 1) {
       return { text: 'Ostatnia sztuka!', color: 'bg-red-500', urgent: true };
-    if (product.stockQuantity <= 3)
+    }
+
+    if (product.stockQuantity <= 3) {
       return {
         text: `Kończy się (${product.stockQuantity} szt.)`,
         color: 'bg-amber-500',
         urgent: true,
       };
-    if (product.stockQuantity <= 10)
-      return {
-        text: `Dostępny (${product.stockQuantity} szt.)`,
-        color: 'bg-green-500',
-        urgent: false,
-      };
+    }
+
     return {
-      text: `Dostępny (${product.stockQuantity}+ szt.)`,
+      text: `Dostępny (${product.stockQuantity} szt.)`,
       color: 'bg-green-500',
       urgent: false,
     };
@@ -166,9 +168,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             )}
             {stockStatus.urgent && (
               <div className="absolute top-2 right-2">
-                <Badge className={cn('text-white text-xs font-bold', stockStatus.color)}>
-                  {stockStatus.urgent && product.stockQuantity <= 1 ? 'OSTATNIA!' : 'KOŃCZY SIĘ'}
-                </Badge>
+                <span
+                  className={cn(
+                    'inline-flex items-center justify-center rounded-md border-transparent px-2 py-0.5 text-xs font-bold text-white',
+                    stockStatus.color,
+                  )}
+                >
+                  {stockStatus.urgent && product.stockQuantity === 0
+                    ? 'BRAK'
+                    : product.stockQuantity <= 1
+                      ? 'OSTATNIA SZTUKA'
+                      : 'KOŃCZY SIĘ'}
+                </span>
               </div>
             )}
           </div>
@@ -191,7 +202,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
           <div className="mt-auto">
             <div className="mb-4">
-              <Badge className={cn('text-white font-medium')}>{stockStatus.text}</Badge>
+              <span
+                className={cn(
+                  'inline-flex items-center justify-center rounded-md border-transparent px-2 py-0.5 text-xs font-medium text-white',
+                  stockStatus.color,
+                )}
+              >
+                {stockStatus.text}
+              </span>
             </div>
 
             <div className="mb-4">

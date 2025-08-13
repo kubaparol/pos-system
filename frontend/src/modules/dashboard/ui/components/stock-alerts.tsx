@@ -35,7 +35,8 @@ export const StockAlerts = ({ alerts, isLoading }: StockAlertsProps) => {
             {alerts.map((alert) => (
               <div
                 key={alert.id}
-                className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+                title={alert.name}
+                className="flex items-center justify-between p-3 gap-3 border rounded-lg hover:bg-gray-50 transition-colors"
               >
                 <div className="flex-1 overflow-hidden">
                   <h4 className="font-medium text-sm text-gray-900 truncate">{alert.name}</h4>
@@ -84,12 +85,12 @@ const getStockStatusText = (status: 'out_of_stock' | 'low_stock'): string => {
 
 const getStockStatusVariant = (
   status: 'out_of_stock' | 'low_stock',
-): 'destructive' | 'secondary' => {
+): 'destructive' | 'secondary' | 'outline' => {
   switch (status) {
     case 'out_of_stock':
       return 'destructive';
     case 'low_stock':
-      return 'secondary';
+      return 'outline';
     default:
       return 'secondary';
   }
