@@ -5,4 +5,5 @@ export const pathKeys = {
   products: '/products',
   archivedProducts: '/archived-products',
   orders: '/orders',
+  notFound: '/404',
 } as const;

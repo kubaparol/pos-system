@@ -1,5 +1,6 @@
 import { type RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import { NotFoundView } from '@/components/base/not-found-view';
 import { AuthLayout } from '@/components/layouts/auth-layout';
 import { BaseLayout } from '@/components/layouts/base-layout';
 
@@ -52,7 +53,17 @@ const appRoutes: RouteObject = {
   ],
 };
 
-const router = createBrowserRouter([appRoutes, authRoutes]);
+const notFoundRoute: RouteObject = {
+  path: pathKeys.notFound,
+  element: <NotFoundView />,
+};
+
+const catchAllRoute: RouteObject = {
+  path: '*',
+  element: <NotFoundView />,
+};
+
+const router = createBrowserRouter([appRoutes, authRoutes, notFoundRoute, catchAllRoute]);
 
 export const Routes = () => {
   return <RouterProvider router={router} />;
