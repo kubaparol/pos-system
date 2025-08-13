@@ -1,4 +1,4 @@
-# Aplikacja - MyStoreAssistant (MVP)
+# Aplikacja - POS System (MVP)
 
 ## Główny problem
 

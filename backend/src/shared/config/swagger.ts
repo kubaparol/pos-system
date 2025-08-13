@@ -6,8 +6,8 @@ const options: swaggerJSDoc.Options = {
   definition: {
     info: {
       description:
-        'REST API for managing products and orders in MyStoreAssistant app',
-      title: 'MyStoreAssistant API',
+        'REST API for managing products and orders in POS System app',
+      title: 'POS System API',
       version: '1.0.0',
     },
     openapi: '3.0.0',

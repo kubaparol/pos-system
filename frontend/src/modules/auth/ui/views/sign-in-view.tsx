@@ -1,4 +1,3 @@
-import { Store } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,9 +23,9 @@ export const SignInView = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md space-y-8">
-        <div className="text-center space-y-6">
-          <div className="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-            <Store className="size-8 text-primary" />
+        <div className="text-center space-y-4">
+          <div className="mx-auto h-16 w-16 rounded-full bg-primary/5 flex items-center justify-center border border-primary/20">
+            <img src="/logo.svg" alt="logo" className="size-8" />
           </div>
 
           <div className="space-y-2">
