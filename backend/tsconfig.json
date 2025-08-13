@@ -7,7 +7,13 @@
     "rootDir": "./",
     "strict": true,
     "isolatedModules": true,
-    "types": ["jest"]
+    "types": ["jest"],
+    //
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": ["**/*.ts", "tests/**/*.test.ts", "jest.config.js"],
   "exclude": ["dist"]
