@@ -56,7 +56,7 @@ export const ProductEditDialog = ({
       title: product.title,
       category: product.category,
       description: product.description,
-      imageUrl: product.imageUrl || '',
+      imageUrl: product.imageUrl || undefined,
       price: Number(product.price),
       stockQuantity: product.stockQuantity,
       reviewRating: Number(product.reviewRating),

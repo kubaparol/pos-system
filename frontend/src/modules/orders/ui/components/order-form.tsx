@@ -22,7 +22,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { useSearchCustomerByPhoneQuery } from '@/modules/customers/api/search-by-phone.query';
-import { handleError } from '@/utils';
+import { formatCurrency, handleError } from '@/utils';
 
 import { useFinalizeOrderMutation } from '../../api/finalize.mutation';
 import type { FinalizeOrderDto, OrderFormDto } from '../../api/types';
@@ -65,6 +65,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
           if (customerData) {
             form.setValue('firstName', customerData.data.data.firstName);
             form.setValue('lastName', customerData.data.data.lastName);
+            form.clearErrors();
           }
         } catch {
           // Ignore lookup errors
@@ -165,7 +166,7 @@ export const OrderForm = ({ onBack, onSuccess }: OrderFormProps) => {
         <div className="mb-4 p-3 bg-gray-50 rounded-lg">
           <div className="flex justify-between items-center text-lg font-semibold">
             <span>Suma zamówienia:</span>
-            <span className="text-green-600">{totalPrice.toFixed(2)} PLN</span>
+            <span className="text-green-600">{formatCurrency(totalPrice)}</span>
           </div>
           <p className="text-sm text-gray-500 mt-1">
             {items.length} {items.length === 1 ? 'produkt' : 'produktów'}

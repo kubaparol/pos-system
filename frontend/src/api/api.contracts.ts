@@ -14,7 +14,7 @@ export const ProductEditDtoSchema = z.object({
   title: z.string().min(1, 'Nazwa jest wymagana'),
   category: z.string().min(1, 'Kategoria jest wymagana'),
   description: z.string(),
-  imageUrl: z.url('Nieprawidłowy URL').or(z.literal('')),
+  imageUrl: z.url('Nieprawidłowy URL').or(z.literal('')).optional(),
   price: z.number().min(1, 'Cena musi być większa niż 1'),
   stockQuantity: z.number().int().min(0, 'Ilość musi być liczbą całkowitą większą lub równą 0'),
   reviewRating: z.number().min(0).max(5),

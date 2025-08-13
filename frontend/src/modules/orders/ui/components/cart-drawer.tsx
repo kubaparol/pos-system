@@ -12,6 +12,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
+import { formatCurrency } from '@/utils';
+
 import { useCartStore } from '../../store/use-cart-store';
 import { CartItem } from './cart-item';
 import { OrderForm } from './order-form';
@@ -77,7 +79,7 @@ export const CartDrawer = () => {
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-lg font-semibold">
                   <span>Suma:</span>
-                  <span className="text-green-600">{totalPrice.toFixed(2)} PLN</span>
+                  <span className="text-green-600">{formatCurrency(totalPrice)}</span>
                 </div>
               </div>
 
