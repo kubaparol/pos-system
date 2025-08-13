@@ -50,7 +50,7 @@ The POS System is a web-based point-of-sale application designed to centralize s
 ### High-Level Architecture
 
 ```
-┌─────────────────┐    HTTP/HTTPS    ┌─────────────────┐
+┌─────────────────┐    HTTP/HTTPS   ┌─────────────────┐
 │                 │ ◄─────────────► │                 │
 │   Frontend      │                 │   Backend API   │
 │   (React SPA)   │                 │   (Express.js)  │

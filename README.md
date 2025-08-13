@@ -38,7 +38,7 @@ The POS System addresses the critical challenge of data synchronization between 
 This project follows a modern full-stack architecture:
 
 ```
-┌─────────────────┐    HTTPS/REST API    ┌─────────────────┐
+┌─────────────────┐    HTTPS/REST API   ┌─────────────────┐
 │                 │ ◄─────────────────► │                 │
 │   Frontend      │                     │   Backend API   │
 │   (React SPA)   │                     │   (Express.js)  │
