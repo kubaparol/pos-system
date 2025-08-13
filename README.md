@@ -9,8 +9,8 @@ A modern, comprehensive point-of-sale web application designed for small retail 
 
 ## 🌐 Live Demo
 
-- **🖥️ Frontend Application**: [https://pos-demo.vercel.app](https://pos-demo.vercel.app)
-- **📡 API Documentation**: [https://pos-api-demo.railway.app/api-docs](https://pos-api-demo.railway.app/api-docs)
+- **🖥️ Frontend Application**: [https://pos-system-ochre.vercel.app](https://pos-system-ochre.vercel.app)
+- **📡 API Documentation**: [https://pos-system-mkt5.onrender.com/api-docs](https://pos-system-mkt5.onrender.com/api-docs)
 
 ### 🔑 Demo Login Credentials
 
@@ -145,7 +145,7 @@ npm run dev
 
 ### API Reference
 
-- 🔗 **Interactive Documentation**: http://localhost:5500/api-docs
+- 🔗 **Interactive Documentation**: [https://pos-system-mkt5.onrender.com/api-docs](https://pos-system-mkt5.onrender.com/api-docs)
 
 ## 🌟 Key Capabilities
 

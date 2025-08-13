@@ -9,7 +9,7 @@ A modern, responsive web interface for point-of-sale operations designed for sma
 
 ## 🌐 Live Demo
 
-- **🖥️ Frontend Application**: [https://pos-demo.vercel.app](https://pos-demo.vercel.app)
+- **🖥️ Frontend Application**: [https://pos-system-ochre.vercel.app](https://pos-system-ochre.vercel.app)
 
 ### 🔑 Demo Login Credentials
 

@@ -166,7 +166,7 @@ The API follows RESTful principles and includes comprehensive input validation, 
 
 ### Interactive Documentation
 
-- **Swagger UI**: `http://localhost:5500/api-docs`
+- **Swagger UI**: `https://pos-system-mkt5.onrender.com/api-docs`
 
 ### Main API Endpoints
 
