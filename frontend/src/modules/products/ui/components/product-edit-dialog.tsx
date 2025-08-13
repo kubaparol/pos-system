@@ -75,8 +75,14 @@ export const ProductEditDialog = ({
     setIsLoading(false);
   };
 
+  const handleOpenChange = (open: boolean) => {
+    form.reset();
+    form.clearErrors();
+    onOpenChange(open);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Edytuj produkt</DialogTitle>

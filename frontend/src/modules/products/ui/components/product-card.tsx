@@ -174,7 +174,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                     stockStatus.color,
                   )}
                 >
-                  {stockStatus.urgent && product.stockQuantity <= 1 ? 'OSTATNIA!' : 'KOŃCZY SIĘ'}
+                  {stockStatus.urgent && product.stockQuantity === 0
+                    ? 'BRAK'
+                    : product.stockQuantity <= 1
+                      ? 'OSTATNIA SZTUKA'
+                      : 'KOŃCZY SIĘ'}
                 </span>
               </div>
             )}

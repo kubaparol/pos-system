@@ -1,4 +1,4 @@
-import qs from "query-string";
+import qs from 'query-string';
 
 export type RemoveUrlQueryParams = {
   params: string;
@@ -19,6 +19,6 @@ export const removeKeysFromQuery = (props: RemoveUrlQueryParams) => {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    { skipNull: true },
   );
 };

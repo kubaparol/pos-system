@@ -34,7 +34,7 @@ export const SignInView = () => {
           </div>
         </div>
 
-        <Card className="w-full shadow-lg border-0 bg-card/50 backdrop-blur-sm">
+        <Card className="w-full">
           <CardHeader className="text-center">
             <CardTitle>Panel logowania</CardTitle>
             <CardDescription>Wprowadź swoje dane, aby uzyskać dostęp do systemu</CardDescription>

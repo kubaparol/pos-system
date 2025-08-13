@@ -1,3 +1,5 @@
+import { PageHeader } from '@/components/base/page-header';
+
 import { useDashboardStatsQuery } from '../../api/stats.query';
 import { KpiCards } from '../components/kpi-cards';
 import { RecentOrders } from '../components/recent-orders';
@@ -23,6 +25,11 @@ export const DashboardView = () => {
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
+      <PageHeader
+        title="Dashboard"
+        description="Przegląd najważniejszych wskaźników sprzedaży, najpopularniejszych produktów i ostatnich zamówień w Twoim sklepie."
+      />
+
       <KpiCards stats={dashboardData?.kpi || null} isLoading={isLoading} />
 
       <div className="grid gap-6 lg:grid-cols-2">
